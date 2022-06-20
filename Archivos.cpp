@@ -46,15 +46,7 @@ void Archivos::crear_vector_escritores(){
         //crear objeto escritor
         referencia_escritor = sacar_parentesis(referencia_escritor);
         pos = funcion_hashing(referencia_escritor);
-/*
-        cout << endl << endl;
-        cout << referencia_escritor << endl;
-        cout << pos << endl;
-        cout << nombre << endl;
-        cout << nacionalidad << endl;
-        cout << anio_nacimiento << endl;
-        cout << anio_fallecimiento << endl;
-*/
+        
         Escritor* aux = new Escritor(referencia_escritor,nombre,nacionalidad,anio_nacimiento,anio_fallecimiento);
         vector_escritores[pos].agregar_objeto(aux);
         //AGREGARLO AL VECTOR
