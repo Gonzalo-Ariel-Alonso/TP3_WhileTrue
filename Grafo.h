@@ -154,7 +154,7 @@ void Grafo<Dato>::eliminar_arista (Dato * origen, Dato * adyacente){
 template<typename Dato>
 Grafo<Dato>::~Grafo(){
   Vertice<Dato> * vertice_borrar;
-  while (!vacio()){
+  while (!vacia()){
     vertice_borrar = primer_vertice;
     primer_vertice = vertice_borrar->get_vertice_siguiente();
     delete[] vertice_borrar;
