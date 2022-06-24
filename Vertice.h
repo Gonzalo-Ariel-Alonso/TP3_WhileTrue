@@ -10,7 +10,7 @@ class Vertice{
 private:
   Vertice<Dato> * vertice_siguiente;
   Dato * dato_actual;
-  Arista * arista_adyacente;
+  Arista<Dato> * arista_adyacente;
 
 public:
   Vertice();

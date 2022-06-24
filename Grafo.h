@@ -8,7 +8,7 @@ template <typename Dato>
 class Grafo{
     // atributos
     private:
-        Vertice * primer_vertice;
+        Vertice<Dato> * primer_vertice;
         int cantidad_vertices;
     public:
         /*

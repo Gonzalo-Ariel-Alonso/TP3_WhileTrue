@@ -9,7 +9,7 @@ template <typename Dato>
 class Arista
 {
 private:
-    Arista * arista_adyacente;
+    Arista<Dato> * arista_adyacente;
     Vertice<Dato> * vertice_adyacente;
     int peso;
 
