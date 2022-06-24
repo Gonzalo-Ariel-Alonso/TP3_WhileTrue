@@ -5,7 +5,7 @@
 #include "Arista.h"
 using namespace std;
 
-template <typename Dato>;
+template <typename Dato>
 class Vertice{
 private:
   Vertice<Dato> * vertice_siguiente;
@@ -60,7 +60,7 @@ void Vertice<Dato>::set_vertice_siguiente( Vertice<Dato> * nuevo_vertice ){
 
 
 template <typename Dato>
-void Vertice<Dato>::set_arista_adyacente (Arista<Dato> * arista_adyacente);{
+void Vertice<Dato>::set_arista_adyacente (Arista<Dato> * arista_adyacente){
   this->arista_adyacente = arista_adyacente;
 }
 
