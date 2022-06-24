@@ -40,7 +40,7 @@ class Grafo{
         Pre: -
         Post: Devuelve el vertice
         */
-        Vertice<Dato>* get_vertice( Dato * dato_buscar );
+        Vertice<Dato>* consulta_vertice( Dato * nuevo_dato );
         /*
         Consulta la cantidad de vertice
         Pre: -
@@ -68,15 +68,6 @@ int Grafo<Dato>::get_cantidad_vertices(){
     return cantidad_vertices;
 }
 
-//Obtener Vertice
-template<typename Dato>
-Vertice<Dato>* Grafo<Dato>::get_vertice( Dato * dato_buscar ) {
-    Vertice<Dato> * vertice_auxiliar = primer_vertice;
-    while ( vertice_auxiliar->get_dato_vertice() != dato_buscar){
-      vertice_auxiliar = vertice_auxiliar->get_vertice_siguiente();
-    }
-    return vertice_auxiliar;
-}
 
 template<typename Dato>
 Vertice<Dato>* Grafo<Dato>::consulta_vertice( Dato * nuevo_dato ){
@@ -114,24 +105,55 @@ void Grafo<Dato>::agregar_vertice( Dato * nuevo_dato ){
     }
     Vertice<Dato> * nuevo_vertice = new Vertice<Dato>(nuevo_dato);
     vertice_actual->set_vertice_siguiente(nuevo_vertice);
+    cantidad_vertices ++;
   }
 }
 
 template <typename Dato>
-void Grafo<Dato>::agregar_arista(Dato * origen, Dato * adyacente){
-  Vertice<Dato> * vertice_origen = get_vertice(origen);
-  Vertice<Dato> * vertice_adyacente = get_vertice(adyacente);
-  
+void Grafo<Dato>::agregar_arista(Dato * origen, Dato * adyacente, int costo_arista){
+  Vertice<Dato> * vertice_origen = consulta_vertice(origen);
+  Vertice<Dato> * vertice_adyacente = consulta_vertice(adyacente);
+  Arista<Dato> * nueva_arista = new Arista<Dato>(vertice_adyacente); //VER DONDE BORRARLA
+  vertice_origen->set_nueva_arista_adyacente(nueva_arista);
+  vertice_origen = 0;
+  vertice_adyacente = 0;
+}
+
+void Grafo<Dato>::eliminar_arista (Dato * origen, Dato * adyacente){
+  Vertice<Dato> * vertice_origen = consulta_vertice(origen); //salida
+  Vertice<Dato> * vertice_adyacente = consulta_vertice(adyacente); //llegada
+  Arista<Dato> * arista_borrar = vertice_origen->get_arista_adyacente();
+  int i = 0;
+  Arista<Dato> * arista_auxiliar;
+  while( arista_borrar->get_dato_vertice_adyacente() != adyacente && arista_borrar->get_arista_siguiente() != 0 ){
+    arista_auxiliar = arista_borrar; //uno anterior al borrado
+    arista_borrar = arista_borrar->get_arista_siguiente();
+    i++;
+  }
+
+  if( i == 0 && arista_borrar->get_dato_vertice_adyacente() == adyacente ){
+    vertice_origen->set_arista_adyacente(arista_borrar->get_arista_siguiente());
+    delete[] arista_borrar;
+  }
+  else if (arista_borrar->get_dato_vertice_adyacente() == adyacente && i != 0){
+    arista_auxiliar->set_arista_siguiente(arista_borrar->get_arista_siguiente());
+    delete[] arista_borrar;
+  }
+  else{
+    cout << "Arista inexistente" << endl;
+  }
+
 }
 
 //Destructor
 template<typename Dato>
 Grafo<Dato>::~Grafo(){
+  Vertice<Dato> * vertice_borrar;
   while (!vacio()){
-    Vertice<Dato> * vertice_actual = primer_vertice;
-    for (int i = 1; i <= cantidad_vertices; i++ ){
-      vertice_actual = vertice_actual->get_vertice_siguiente();
-    }
+    vertice_borrar = primer_vertice;
+    primer_vertice = vertice_borrar->get_vertice_siguiente();
+    delete[] vertice_borrar;
+    cantidad_vertices --;
   }
 }
 
