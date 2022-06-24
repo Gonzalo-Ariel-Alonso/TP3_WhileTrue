@@ -5,6 +5,11 @@
 #include "Arista.h"
 using namespace std;
 
+
+
+template <typename Dato>
+class Arista;
+
 template <typename Dato>
 class Vertice{
 private:

@@ -2,6 +2,7 @@
 #define GRAFO_H
 
 #include "Vertice.h"
+#include "Arista.h"
 
 template <typename Dato>
 
