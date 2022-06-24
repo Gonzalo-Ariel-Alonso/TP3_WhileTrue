@@ -15,19 +15,19 @@ template <typename Dato>
 class Vertice{
 private:
   Vertice<Dato> * vertice_siguiente;
-  Dato * dato_actual;
+  Dato dato_actual;
   Arista<Dato> * arista_adyacente;
 
 public:
   Vertice();
-  Vertice(Dato * dato);
+  Vertice(Dato dato);
   ~Vertice();
   Vertice<Dato>* get_vertice_siguiente();
   void set_vertice_siguiente (Vertice<Dato> * nuevo_vertice);
   void set_arista_adyacente (Arista<Dato> * arista_adyacente);
   void set_nueva_arista_adyacente (Arista<Dato> * nueva_arista_adyacente);
-  Dato* get_dato_vertice();
-  void set_dato_actual(Dato * nuevo_dato);
+  Dato get_dato_vertice();
+  void set_dato_actual(Dato nuevo_dato);
 };
 
 
@@ -40,7 +40,7 @@ Vertice<Dato>::Vertice (){
 
 
 template <typename Dato>
-Vertice<Dato>::Vertice ( Dato * dato ){
+Vertice<Dato>::Vertice ( Dato dato ){
   vertice_siguiente = 0;
   dato_actual = dato;
   arista_adyacente = 0;
@@ -87,12 +87,12 @@ void Vertice<Dato>::set_nueva_arista_adyacente (Arista<Dato> * nueva_arista_adya
 
 
 template <typename Dato>
-Dato* Vertice<Dato>::get_dato_vertice(){
+Dato Vertice<Dato>::get_dato_vertice(){
   return dato_actual;
 }
 
 template <typename Dato>
-void Vertice<Dato>::set_dato_actual(Dato * nuevo_dato){
+void Vertice<Dato>::set_dato_actual(Dato  nuevo_dato){
   dato_actual = nuevo_dato;
 }
 

@@ -12,10 +12,10 @@ int main(){
   Grafo<int> el_grafo;
   p = &i;
   t = &j;
-  el_grafo.agregar_vertice(p);
-  el_grafo.agregar_vertice(t);
-  el_grafo.agregar_arista(p,t,9000);
-  cout << el_grafo.consulta_vertice(p) << std::endl;
+  el_grafo.agregar_vertice(i);
+  el_grafo.agregar_vertice(j);
+  el_grafo.agregar_arista(i,j,9000);
+  cout << el_grafo.consulta_vertice(i)->get_dato_vertice() << std::endl;
 
 
   return 0;

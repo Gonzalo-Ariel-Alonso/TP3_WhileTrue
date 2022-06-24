@@ -29,7 +29,7 @@ class Grafo{
         Pre: el vertice a agregar
         Post: deja apuntando el vertice al nuevo y lo devuelve
         */
-        void agregar_vertice(Dato * vertice_nuevo);
+        void agregar_vertice(Dato  vertice_nuevo);
         /*
         Cambia un vertice
         Pre: el vertice a cambiar
@@ -41,7 +41,7 @@ class Grafo{
         Pre: -
         Post: Devuelve el vertice
         */
-        Vertice<Dato>* consulta_vertice( Dato * nuevo_dato );
+        Vertice<Dato>* consulta_vertice( Dato  nuevo_dato );
         /*
         Consulta la cantidad de vertice
         Pre: -
@@ -49,8 +49,8 @@ class Grafo{
         */
         int get_cantidad_vertices();
 
-        void agregar_arista(Dato * origen, Dato * adyacente, int costo_arista);
-        void eliminar_arista (Dato * origen, Dato * adyacente);
+        void agregar_arista(Dato  origen, Dato  adyacente, int costo_arista);
+        void eliminar_arista (Dato  origen, Dato  adyacente);
         //Destructor
         ~Grafo();
 };
@@ -74,7 +74,7 @@ int Grafo<Dato>::get_cantidad_vertices(){
 
 
 template<typename Dato>
-Vertice<Dato>* Grafo<Dato>::consulta_vertice( Dato * nuevo_dato ){
+Vertice<Dato>* Grafo<Dato>::consulta_vertice( Dato  nuevo_dato ){
   Vertice<Dato>* vertice_auxiliar;
   if (vacia()){
     cout << "Grafo Vacio!"<< endl;
@@ -97,14 +97,14 @@ Vertice<Dato>* Grafo<Dato>::consulta_vertice( Dato * nuevo_dato ){
 
 //Cambiar Vertice
 template<typename Dato>
-void Grafo<Dato>::agregar_vertice( Dato * nuevo_dato ){
+void Grafo<Dato>::agregar_vertice( Dato  nuevo_dato ){
   if (cantidad_vertices == 0){
     primer_vertice = new Vertice<Dato>(nuevo_dato);
     cantidad_vertices ++;
   }
   else{
     Vertice<Dato> * vertice_actual = primer_vertice;
-    for (int i = 1; i <= cantidad_vertices; i++ ){
+    for (int i = 1; i < cantidad_vertices; i++ ){
       vertice_actual = vertice_actual->get_vertice_siguiente();
     }
     Vertice<Dato> * nuevo_vertice = new Vertice<Dato>(nuevo_dato);
@@ -114,7 +114,7 @@ void Grafo<Dato>::agregar_vertice( Dato * nuevo_dato ){
 }
 
 template <typename Dato>
-void Grafo<Dato>::agregar_arista(Dato * origen, Dato * adyacente, int costo_arista){
+void Grafo<Dato>::agregar_arista(Dato  origen, Dato  adyacente, int costo_arista){
   Vertice<Dato> * vertice_origen = consulta_vertice(origen);
   Vertice<Dato> * vertice_adyacente = consulta_vertice(adyacente);
   Arista<Dato> * nueva_arista = new Arista<Dato>(vertice_adyacente); //VER DONDE BORRARLA
@@ -124,7 +124,7 @@ void Grafo<Dato>::agregar_arista(Dato * origen, Dato * adyacente, int costo_aris
 }
 
 template <typename Dato>
-void Grafo<Dato>::eliminar_arista (Dato * origen, Dato * adyacente){
+void Grafo<Dato>::eliminar_arista (Dato  origen, Dato  adyacente){
   Vertice<Dato> * vertice_origen = consulta_vertice(origen); //salida
   Vertice<Dato> * vertice_adyacente = consulta_vertice(adyacente); //llegada
   Arista<Dato> * arista_borrar = vertice_origen->get_arista_adyacente();
