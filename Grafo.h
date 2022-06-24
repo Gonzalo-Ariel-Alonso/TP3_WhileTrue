@@ -28,7 +28,7 @@ class Grafo{
         Pre: el vertice a agregar
         Post: deja apuntando el vertice al nuevo y lo devuelve
         */
-        Vertice<Dato> * agregar_vertice(Vertice<Dato>* vertice_nuevo);
+        void agregar_vertice(Dato * vertice_nuevo);
         /*
         Cambia un vertice
         Pre: el vertice a cambiar
@@ -47,6 +47,9 @@ class Grafo{
         Post: Devuelve la cantidad de vertices
         */
         int get_cantidad_vertices();
+
+        void agregar_arista(Dato * origen, Dato * adyacente, int costo_arista);
+        void eliminar_arista (Dato * origen, Dato * adyacente);
         //Destructor
         ~Grafo();
 };
@@ -119,6 +122,7 @@ void Grafo<Dato>::agregar_arista(Dato * origen, Dato * adyacente, int costo_aris
   vertice_adyacente = 0;
 }
 
+template <typename Dato>
 void Grafo<Dato>::eliminar_arista (Dato * origen, Dato * adyacente){
   Vertice<Dato> * vertice_origen = consulta_vertice(origen); //salida
   Vertice<Dato> * vertice_adyacente = consulta_vertice(adyacente); //llegada

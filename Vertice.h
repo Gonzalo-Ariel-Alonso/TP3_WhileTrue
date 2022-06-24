@@ -65,13 +65,13 @@ void Vertice<Dato>::set_vertice_siguiente( Vertice<Dato> * nuevo_vertice ){
 
 
 template <typename Dato>
-void Vertice<Dato>::set_arista_adyacente (Arista<Dato> * arista_adyacente);{
+void Vertice<Dato>::set_arista_adyacente (Arista<Dato> * arista_adyacente){
   this->arista_adyacente = arista_adyacente;
 }
 
 
 template <typename Dato>
-void Vertice<Dato>::set_nueva_arista_adyacente (Arista<Dato> * nueva_arista_adyacente);{
+void Vertice<Dato>::set_nueva_arista_adyacente (Arista<Dato> * nueva_arista_adyacente){
   Arista<Dato> * arista_auxiliar;
   while (arista_auxiliar->get_arista_siguiente() != 0){
     arista_auxiliar = arista_auxiliar->get_arista_siguiente();
@@ -81,7 +81,7 @@ void Vertice<Dato>::set_nueva_arista_adyacente (Arista<Dato> * nueva_arista_adya
 
 
 template <typename Dato>
-Dato* Vertice<Dato>::get_dato_vertice();{
+Dato* Vertice<Dato>::get_dato_vertice(){
   return dato_actual;
 }
 

@@ -2,6 +2,7 @@
 #define ARISTA_H
 
 #include "Vertice.h"
+
 //#include "Descanso_entre_lecturas.h"
 
 template <typename Dato>
@@ -47,19 +48,17 @@ void Arista<Dato>::set_arista_siguiente(Arista<Dato> * arista_nueva){
     arista_adyacente = arista_nueva;
 }
 
-template <typename Dato>
-Arista<Dato> Arista<Dato>::get_arista_siguiente(){
-    return arista_adyacente;
-}
 
 template <typename Dato>
 void Arista<Dato>::set_vertice_adyacente(Vertice<Dato> * vertice_adyacente){
     this->vertice_adyacente = vertice_adyacente;
 }
+
 template <typename Dato>
 Vertice<Dato> * Arista<Dato>::get_vertice_adyacente(){
     return vertice_adyacente;
 }
+
 template <typename Dato>
 Dato Arista<Dato>::get_dato_vertice_adyacente(){
   return vertice_adyacente->get_dato_vertice();
