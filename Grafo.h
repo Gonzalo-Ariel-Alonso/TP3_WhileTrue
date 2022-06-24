@@ -28,7 +28,7 @@ class Grafo{
         Pre: el vertice a agregar
         Post: deja apuntando el vertice al nuevo y lo devuelve
         */
-        Vertice * agregar_vertice(Vertice<Dato>* vertice_nuevo);
+        Vertice<Dato> * agregar_vertice(Vertice<Dato>* vertice_nuevo);
         /*
         Cambia un vertice
         Pre: el vertice a cambiar
@@ -40,7 +40,7 @@ class Grafo{
         Pre: -
         Post: Devuelve el vertice
         */
-        Vertice* get_vertice();
+        Vertice<Dato>* get_vertice( Dato * dato_buscar );
         /*
         Consulta la cantidad de vertice
         Pre: -
@@ -51,7 +51,7 @@ class Grafo{
         ~Grafo();
 };
 
-//Constructor   
+//Constructor
 template<typename Dato>
 Grafo<Dato>::Grafo(){
     primer_vertice = 0;
@@ -67,18 +67,64 @@ template<typename Dato>
 int Grafo<Dato>::get_cantidad_vertices(){
     return cantidad_vertices;
 }
+
 //Obtener Vertice
 template<typename Dato>
-Vertice* Grafo<Dato>::get_vertice() {
-    return primer_vertice;
+Vertice<Dato>* Grafo<Dato>::get_vertice( Dato * dato_buscar ) {
+    Vertice<Dato> * vertice_auxiliar = primer_vertice;
+    while ( vertice_auxiliar->get_dato_vertice() != dato_buscar){
+      vertice_auxiliar = vertice_auxiliar->get_vertice_siguiente();
+    }
+    return vertice_auxiliar;
 }
+
+template<typename Dato>
+Vertice<Dato>* Grafo<Dato>::consulta_vertice( Dato * nuevo_dato ){
+  Vertice<Dato>* vertice_auxiliar;
+  if (vacia()){
+    cout << "Grafo Vacio!"<< endl;
+  }
+  else{
+    Vertice<Dato> * vertice_actual = primer_vertice;
+    for (int i = 1; i <= cantidad_vertices; i++ ){
+      vertice_actual = vertice_actual->get_vertice_siguiente();
+      if (vertice_actual->get_dato_vertice() == nuevo_dato){
+        vertice_auxiliar = vertice_actual;
+        i = cantidad_vertices++;
+      }
+    }
+  }
+  if ( !vertice_auxiliar ){
+    cout << "No esta el vertice" << endl;
+  }
+  return vertice_auxiliar; //devuelve vacio si no esta
+}
+
 //Cambiar Vertice
 template<typename Dato>
-void Grafo<Dato>::set_vertice_siguiente(){
+void Grafo<Dato>::agregar_vertice( Dato * nuevo_dato ){
+  if (cantidad_vertices == 0){
+    primer_vertice = new Vertice<Dato>(nuevo_dato);
+    cantidad_vertices ++;
+  }
+  else{
+    Vertice<Dato> * vertice_actual = primer_vertice;
+    for (int i = 1; i <= cantidad_vertices; i++ ){
+      vertice_actual = vertice_actual->get_vertice_siguiente();
+    }
+    Vertice<Dato> * nuevo_vertice = new Vertice<Dato>(nuevo_dato);
+    vertice_actual->set_vertice_siguiente(nuevo_vertice);
+  }
 }
 //Destructor
 template<typename Dato>
 Grafo<Dato>::~Grafo(){
+  while (!vacio()){
+    Vertice<Dato> * vertice_actual = primer_vertice;
+    for (int i = 1; i <= cantidad_vertices; i++ ){
+      vertice_actual = vertice_actual->get_vertice_siguiente();
+    }
+  }
 }
 
 #endif

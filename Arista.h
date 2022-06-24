@@ -31,6 +31,7 @@ Arista<Dato>::Arista(){
 template <typename Dato>
 Arista<Dato>::~Arista(){
     arista_adyacente = nullptr;
+    vertice_adyacente = nullptr;
 }
 
 template <typename Dato>
