@@ -116,6 +116,14 @@ void Grafo<Dato>::agregar_vertice( Dato * nuevo_dato ){
     vertice_actual->set_vertice_siguiente(nuevo_vertice);
   }
 }
+
+template <typename Dato>
+void Grafo<Dato>::agregar_arista(Dato * origen, Dato * adyacente){
+  Vertice<Dato> * vertice_origen = get_vertice(origen);
+  Vertice<Dato> * vertice_adyacente = get_vertice(adyacente);
+  
+}
+
 //Destructor
 template<typename Dato>
 Grafo<Dato>::~Grafo(){
