@@ -51,6 +51,10 @@ void Arista<Dato>::set_arista_siguiente(Arista<Dato> * arista_nueva){
     arista_adyacente = arista_nueva;
 }
 
+template <typename Dato>
+Arista<Dato> * Arista<Dato>::get_arista_siguiente(){
+    return arista_adyacente;
+}
 
 template <typename Dato>
 void Arista<Dato>::set_vertice_adyacente(Vertice<Dato> * vertice_adyacente){

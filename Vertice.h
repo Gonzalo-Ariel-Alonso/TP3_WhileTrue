@@ -3,6 +3,7 @@
 
 #include<iostream>
 #include "Arista.h"
+
 using namespace std;
 
 
