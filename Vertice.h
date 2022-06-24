@@ -5,7 +5,7 @@
 #include "Arista.h"
 using namespace std;
 
-template <typename Dato>;
+template <typename Dato>
 class Vertice{
 private:
   Vertice<Dato> * vertice_siguiente;
