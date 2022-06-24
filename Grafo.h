@@ -64,7 +64,7 @@ bool Grafo<Dato>::vacia(){
 }
 //Obtener cantidad vertice
 template<typename Dato>
-int Grafo<Dato>::get_catidad_vertices(){
+int Grafo<Dato>::get_cantidad_vertices(){
     return cantidad_vertices;
 }
 //Obtener Vertice
