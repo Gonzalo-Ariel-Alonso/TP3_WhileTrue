@@ -91,7 +91,7 @@ Dato* Vertice<Dato>::get_dato_vertice(){
 }
 
 template <typename Dato>
-void set_dato_actual(Dato * nuevo_dato){
+void Vertice<Dato>::set_dato_actual(Dato * nuevo_dato){
   dato_actual = nuevo_dato;
 }
 
