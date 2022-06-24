@@ -4,7 +4,7 @@
 #include "Vertice.h"
 //#include "Descanso_entre_lecturas.h"
 
-template <class Dato>
+template <typename Dato>
 class Arista
 {
 private:
@@ -23,43 +23,43 @@ public:
     int get_peso();
 };
 
-template <class Dato>
+template <typename Dato>
 Arista<Dato>::Arista(){
 }
 
 
-template <class Dato>
+template <typename Dato>
 Arista<Dato>::~Arista(){
     arista_adyacente = nullptr;
 }
 
-template <class Dato>
+template <typename Dato>
 Arista<Dato>::Arista(Vertice<Dato> * vertice_adyacente){
     this->vertice_adyacente = vertice_adyacente;
     /*Descanso_entre_lecturas Descanso(Vertice_adyacente->get_tipo_de_lectura,arista_adyacente->get_vertice_adyacente()->get_tipo_de_lectura);
     peso = Descanso.get_tiempo_de_descanso();*/
 }
 
-template <class Dato>
+template <typename Dato>
 void Arista<Dato>::set_arista_siguiente(Arista * arista_nueva){
     arista_adyacente = arista_nueva;
 }
 
-template <class Dato>
+template <typename Dato>
 Arista<Dato> Arista<Dato>::get_arista_siguiente(){
     return arista_adyacente;
 }
 
-template <class Dato>
+template <typename Dato>
 void Arista<Dato>::set_vertice_adyacente(Vertice<Dato> * vertice_adyacente){
     this->vertice_adyacente = vertice_adyacente;
 }
-template <class Dato>
+template <typename Dato>
 Vertice<Dato> * Arista<Dato>::get_vertice_adyacente(){
     return vertice_adyacente;
 }
 
-template <class Dato>
+template <typename Dato>
 int Arista<Dato>::get_peso(){
     return peso;
 }
