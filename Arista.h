@@ -26,6 +26,7 @@ public:
     Vertice<Dato> * get_vertice_adyacente();
     Dato get_dato_vertice_adyacente();
     int get_peso();
+    void set_peso(int peso);
 };
 
 template <typename Dato>
@@ -42,8 +43,6 @@ Arista<Dato>::~Arista(){
 template <typename Dato>
 Arista<Dato>::Arista(Vertice<Dato> * vertice_adyacente){
     this->vertice_adyacente = vertice_adyacente;
-    /*Descanso_entre_lecturas Descanso(Vertice_adyacente->get_tipo_de_lectura,arista_adyacente->get_vertice_adyacente()->get_tipo_de_lectura);
-    peso = Descanso.get_tiempo_de_descanso();*/
 }
 
 template <typename Dato>
@@ -74,6 +73,11 @@ Dato Arista<Dato>::get_dato_vertice_adyacente(){
 template <typename Dato>
 int Arista<Dato>::get_peso(){
     return peso;
+}
+
+template <typename Dato>
+void Arista<Dato>::set_peso(int peso){
+    this->peso = peso;
 }
 
 
