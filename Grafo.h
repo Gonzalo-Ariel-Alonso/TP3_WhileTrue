@@ -184,6 +184,7 @@ void Grafo<Dato>::eliminar_vertice(Dato dato){
   if (primer_vertice->get_dato_vertice() == dato ){
     cout << "el vertice era el primero" << endl;
     primer_vertice = primer_vertice->get_vertice_siguiente();
+    cout << "borrando ........... " << endl;
     delete [] actual;
     cout << "borre el primer vertice" <<endl;
   }
