@@ -52,12 +52,14 @@ Vertice<Dato>::Vertice ( Dato dato ){
 template <typename Dato>
 Vertice<Dato>::~Vertice(){
   //voy a borrar solo las aristas del vertice aca
+  cout << "vertice destructor" << endl;
   Arista<Dato> * arista_auxiliar = arista_adyacente; //agarra al primero
-  while(arista_adyacente->get_arista_siguiente() != 0){
+  while( arista_adyacente->get_arista_siguiente() != 0 ){
     arista_adyacente = arista_adyacente->get_arista_siguiente(); //el primero pasa a ser el segundo
     delete[] arista_auxiliar; //SE BORRA LA ARISTA;
   }
   delete [] arista_auxiliar;
+  cout << "termine el destructor de vertice " << endl;
 }
 
 
@@ -98,19 +100,30 @@ template <typename Dato>
 void Vertice<Dato>::eliminar_arista(Dato dato){
   Arista<Dato> * actual = arista_adyacente;
   Arista<Dato> * anterior;
+
+  //si es la primer arista ( arista nro 1)
   if(arista_adyacente->get_vertice_adyacente()->get_dato_vertice() == dato){
+    cout << "voy a eliminar la primer arista" << endl;
     arista_adyacente = actual->get_arista_siguiente();
     delete[] actual;
+    cout << "Termine de eliminar la primer arista " << endl;
   }
+  //Else si son las otras
   else{
+    cout << "voy a eliminar una arista si esta" << endl;
+    //mientras que no llegue al ultimo puntero nullo y en este caso no entra ya
     while(actual != 0){
       anterior = actual;
       actual = actual->get_arista_siguiente();
       if(actual->get_vertice_adyacente()->get_dato_vertice() == dato ){
+        cout << "encontre la arista a eliminar" <<endl;
         anterior->set_arista_siguiente(actual->get_arista_siguiente());
         delete[] actual;
+        cout << "la elimine" << endl;
+
       }
     }
+    cout << "termine eliminarla de buscar la arista a eliminar" << endl;
   }
 }
 

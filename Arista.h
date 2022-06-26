@@ -1,8 +1,12 @@
 #ifndef ARISTA_H
 #define ARISTA_H
 
+#include <iostream>
+
 #include "Vertice.h"
 
+
+using namespace std;
 //#include "Descanso_entre_lecturas.h"
 
 template <typename Dato>
@@ -36,8 +40,10 @@ Arista<Dato>::Arista(){
 
 template <typename Dato>
 Arista<Dato>::~Arista(){
+    cout << "destructor Arista" << endl;
     arista_adyacente = nullptr;
     vertice_adyacente = nullptr;
+    cout << "Termine de destruir la arista" << endl;
 }
 
 template <typename Dato>
