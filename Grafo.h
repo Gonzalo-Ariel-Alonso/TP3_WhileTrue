@@ -4,11 +4,11 @@
 #include "Vertice.h"
 #include "Arista.h"
 
-/*template <typename Dato>
+template <typename Dato>
 class Vertice;
 
 template <typename Dato>
-class Arista;*/
+class Arista;
 
 
 template <typename Dato>

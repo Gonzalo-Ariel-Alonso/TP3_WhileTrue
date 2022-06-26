@@ -19,15 +19,12 @@ private:
 
 public:
     Arista(Vertice<Dato> * vertice_destino,int peso);
-    Arista(Vertice<Dato> * vertice_adyacente);
     ~Arista();
     void set_arista_siguiente(Arista<Dato> * arista_nueva);
     Arista<Dato>* get_arista_siguiente();
-    void set_vertice_adyacente(Vertice<Dato> * vertice_adyacente);
+    void set_vertice_destino(Vertice<Dato> * vertice_destino);
     Vertice<Dato> * get_vertice_destino();
-    Dato get_dato_vertice_adyacente();
     int get_peso();
-    void set_peso(int peso);
 };
 
 template <typename Dato>
@@ -38,4 +35,33 @@ Arista<Dato>::Arista(Vertice<Dato> * vertice_destino,int peso){
     vertice_destino = nullptr;
 }
 
+template <typename Dato>
+void Arista<Dato>::set_arista_siguiente(Arista<Dato> * arista_nueva){
+    arista_nueva = arista_siguiente;
+}
+
+template <typename Dato>
+Arista<Dato>* Arista<Dato>::get_arista_siguiente(){
+    return arista_siguiente;
+}
+
+template <typename Dato>
+void Arista<Dato>::set_vertice_destino(Vertice<Dato> * vertice_destino){
+    this->vertice_destino = vertice_destino;
+}
+
+template <typename Dato>
+int Arista<Dato>::get_peso(){
+    return peso;
+}
+
+template <typename Dato>
+Vertice<Dato> * Arista<Dato>::get_vertice_destino(){
+    return vertice_destino;
+}
+
+template <typename Dato>
+Arista<Dato>::~Arista(){
+
+}
 #endif
