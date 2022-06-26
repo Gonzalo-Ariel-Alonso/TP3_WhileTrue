@@ -14,6 +14,7 @@ private:
     Arista<Dato> * primera_arista;
     Dato contenido;
 public:
+    Vertice();
     Vertice(Dato contenido);
     ~Vertice();
     Dato get_contenido();
@@ -23,6 +24,10 @@ public:
     void set_primera_arista(Arista<Dato>* primera_arista);
 
 };
+
+template <typename Dato>
+Vertice<Dato>::Vertice(){
+}
 
 template <typename Dato>
 Vertice<Dato>::Vertice(Dato contenido){

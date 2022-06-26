@@ -18,6 +18,7 @@ private:
     int peso;
 
 public:
+    Arista();
     Arista(Vertice<Dato> * vertice_destino,int peso);
     ~Arista();
     void set_arista_siguiente(Arista<Dato> * arista_nueva);
@@ -26,6 +27,11 @@ public:
     Vertice<Dato> * get_vertice_destino();
     int get_peso();
 };
+
+template <typename Dato>
+Arista<Dato>::Arista(){
+
+}
 
 template <typename Dato>
 Arista<Dato>::Arista(Vertice<Dato> * vertice_destino,int peso){

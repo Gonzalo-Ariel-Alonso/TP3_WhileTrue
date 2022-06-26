@@ -18,7 +18,7 @@ private:
     Vertice<Dato> * primer_vertice;
     int cantidad_vertices;
 public:
-    Grafo(/* args */);
+    Grafo();
     ~Grafo();
     bool vacio();
     int get_cantidad_vertice();
@@ -28,6 +28,7 @@ public:
     void mostar_lista_de_adyacencia();
     void eliminar_vertice(Dato vertice_a_eliminar);
     void eliminar_arista(Dato dato_vertice_partida, Dato dato_vertice_destino);
+    void eliminar_grafo();
 private:
     void aislar_vertice(Dato vertice_a_aislar);
 
@@ -41,13 +42,25 @@ Grafo<Dato>::Grafo(){
 }
 
 template <typename Dato>
-Grafo<Dato>::~Grafo()
-{
+Grafo<Dato>::~Grafo(){
+    /*Vertice<Dato> * iterador_auxliar_vertice = primer_vertice;
+    while (iterador_auxliar_vertice){
+        Arista<Dato> * iterador_auxliar_arista;
+        while (iterador_auxliar_arista){
+            eliminar_arista(iterador_auxliar_vertice->get_contenido(),iterador_auxliar_arista->get_vertice_destino()->get_contenido);
+            iterador_auxliar_arista = iterador_auxliar_arista->get_arista_siguiente();
+        }
+        eliminar_vertice(iterador_auxliar_vertice->get_contenido());
+        iterador_auxliar_vertice = iterador_auxliar_vertice->get_vertice_siguiente();
+    }
+    cout << "Grafo destruido\n";*/
+    eliminar_grafo();
+    cout << "Grafo destruido\n";
 }
 
 template <typename Dato>
 bool Grafo<Dato>::vacio(){
-    return cantidad_vertices;
+    return (cantidad_vertices == 0);
 }
 
 
@@ -114,10 +127,10 @@ template <typename Dato>
 void Grafo<Dato>::mostar_lista_de_adyacencia(){
     Vertice<Dato> * iterador_aux_vertice = primer_vertice;
     while (iterador_aux_vertice){
-        cout << "El vertice " << iterador_aux_vertice->get_contenido()<< "esta conectador con los vertices: ";
-        Arista<Dato> * iterador_aux_arista;
+        cout << "El vertice " << iterador_aux_vertice->get_contenido()<< " esta conectador con los vertices: ";
+        Arista<Dato> * iterador_aux_arista = iterador_aux_vertice->get_primera_arista();
         while (iterador_aux_arista){
-            cout <<" --" << iterador_aux_arista->get_peso() << "--> "<< iterador_aux_arista->get_vertice_destino();
+            cout <<" --" << iterador_aux_arista->get_peso() << "--> "<< iterador_aux_arista->get_vertice_destino()->get_contenido();
             iterador_aux_arista =  iterador_aux_arista->get_arista_siguiente();
         }
         iterador_aux_vertice = iterador_aux_vertice->get_vertice_siguiente();
@@ -129,13 +142,18 @@ template <typename Dato>
 void Grafo<Dato>::aislar_vertice(Dato vertice_a_aislar){
     Vertice<Dato> * iterador_aux_vertice = primer_vertice;
     while (iterador_aux_vertice){
-        Arista<Dato> * iterador_aux_arista;
+        Arista<Dato> * iterador_aux_arista = iterador_aux_vertice->get_primera_arista();
+        Arista<Dato> * siguiente_a_iterador_aux;
         while (iterador_aux_arista){
-            if(iterador_aux_arista->get_vertice_destino()->get_contenido() == vertice_a_aislar || iterador_aux_vertice->get_contenido == vertice_a_aislar)
+            if(iterador_aux_arista->get_vertice_destino()->get_contenido() == vertice_a_aislar || iterador_aux_vertice->get_contenido() == vertice_a_aislar){
+                siguiente_a_iterador_aux = iterador_aux_arista->get_arista_siguiente();
                 eliminar_arista(iterador_aux_vertice->get_contenido(),iterador_aux_arista->get_vertice_destino()->get_contenido());
-            iterador_aux_arista->get_arista_siguiente();
+                iterador_aux_arista = siguiente_a_iterador_aux;
+            }
+            else
+                iterador_aux_arista = iterador_aux_arista->get_arista_siguiente();
         }
-        iterador_aux_vertice->vertice_siguiente;
+        iterador_aux_vertice = iterador_aux_vertice->get_vertice_siguiente();
     }
 }
 
@@ -143,8 +161,8 @@ template <typename Dato>
 void Grafo<Dato>::eliminar_vertice(Dato vertice_a_eliminar){
     if(buscar_vertice(vertice_a_eliminar)){ // Comprobamos que el vertice a eliminar exista
         aislar_vertice(vertice_a_eliminar);
-        Vertice<Dato> Vertice_a_eliminar = primer_vertice;
-        if (primer_vertice->get_contenido == vertice_a_eliminar){
+        Vertice<Dato> *Vertice_a_eliminar = primer_vertice;
+        if (primer_vertice->get_contenido() == vertice_a_eliminar){
             primer_vertice = primer_vertice->get_vertice_siguiente();
             delete Vertice_a_eliminar;
             cout << "El Vertice " << vertice_a_eliminar << " fue eliminado.\n";
@@ -154,10 +172,10 @@ void Grafo<Dato>::eliminar_vertice(Dato vertice_a_eliminar){
             Vertice<Dato> * iterador_auxiliar = primer_vertice->get_vertice_siguiente();
             Vertice<Dato> * anterior_a_auxliar = primer_vertice;
             while (iterador_auxiliar){
-                if (iterador_auxiliar->get_contenido == vertice_a_eliminar){
+                if (iterador_auxiliar->get_contenido() == vertice_a_eliminar){
                     anterior_a_auxliar->set_vertice_siguiente(iterador_auxiliar->get_vertice_siguiente());//enlazamos el vertice anterior al de eliminar con el del siguiente a eliminar
-                    vertice_a_eliminar = iterador_auxiliar;
-                    delete vertice_a_eliminar;
+                    Vertice_a_eliminar = iterador_auxiliar;
+                    delete Vertice_a_eliminar;
                     cout << "El Vertice " << vertice_a_eliminar << " fue eliminado.\n";
                     iterador_auxiliar = nullptr;
                     cantidad_vertices--;
@@ -188,7 +206,7 @@ void Grafo<Dato>::eliminar_arista(Dato dato_vertice_partida, Dato dato_vertice_d
         Arista<Dato>* iterador_auxiliar_partida = vertice_partida->get_primera_arista()->get_arista_siguiente();
         Arista<Dato>* iterador_auxiliar_destino = vertice_destino->get_primera_arista();
         Arista<Dato>* arista_a_borrar;
-        if (vertice_partida->get_primera_arista()->get_vertice_destino()->get_contenido == dato_vertice_destino){
+        if (vertice_partida->get_primera_arista()->get_vertice_destino()->get_contenido() == dato_vertice_destino){
             arista_a_borrar = vertice_partida->get_primera_arista();
             vertice_partida->set_primera_arista(vertice_partida->get_primera_arista()->get_arista_siguiente());
             delete arista_a_borrar;
@@ -197,7 +215,7 @@ void Grafo<Dato>::eliminar_arista(Dato dato_vertice_partida, Dato dato_vertice_d
         else{
             Arista<Dato>* anterior_a_auxliar = vertice_partida->get_primera_arista();
             while (iterador_auxiliar_partida){
-                if(iterador_auxiliar_partida->get_vertice_destino()->get_contenido == dato_vertice_destino){
+                if(iterador_auxiliar_partida->get_vertice_destino()->get_contenido() == dato_vertice_destino){
                     arista_a_borrar = iterador_auxiliar_partida;
                     anterior_a_auxliar->set_arista_siguiente(iterador_auxiliar_partida->get_arista_siguiente());
                     delete[] arista_a_borrar;
@@ -211,6 +229,19 @@ void Grafo<Dato>::eliminar_arista(Dato dato_vertice_partida, Dato dato_vertice_d
             }
         }
     }   
+}
+
+template <typename Dato>
+void Grafo<Dato>::eliminar_grafo(){
+    Vertice<Dato> * iterador_auxilar = primer_vertice;
+    while (primer_vertice){
+        iterador_auxilar = primer_vertice;
+        primer_vertice = primer_vertice->get_vertice_siguiente();
+        aislar_vertice(iterador_auxilar->get_contenido());
+        delete[] iterador_auxilar;
+        cantidad_vertices--;
+    }
+    cout << "Grafo eliminado\n";
 }
 
 #endif
