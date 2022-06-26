@@ -18,6 +18,7 @@ int main(){
   cout << "agrego p" << endl;
   el_grafo.agregar_vertice(p);
   cout << *el_grafo.consulta_vertice(p)->get_dato_vertice() << std::endl;
+
   cout << "agrego t" << endl;
   el_grafo.agregar_vertice(t);
   cout << *el_grafo.consulta_vertice(t)->get_dato_vertice() << std::endl;
@@ -28,7 +29,39 @@ int main(){
   el_grafo.agregar_arista(p,t,9000);
   cout << "1ro" << endl;
 
-  cout << el_grafo.consulta_vertice(p)->get_arista_adyacente()->get_peso() << std::endl;
+  Arista<int*> * arista_aux = el_grafo.consulta_vertice(p)->get_arista_adyacente();
+  cout << "vertice p = 30" << endl;
+  while (arista_aux != 0){
+    cout << *arista_aux->get_dato_vertice_adyacente() << endl;
+    cout << arista_aux->get_peso() << endl;
+    arista_aux = arista_aux->get_arista_siguiente();
+  }
+  el_grafo.eliminar_arista(p,t);
+  arista_aux = el_grafo.consulta_vertice(p)->get_arista_adyacente();
+  cout << "vertice p = 30" << endl;
+  while (arista_aux != 0){
+    cout << *arista_aux->get_dato_vertice_adyacente() << endl;
+    cout << arista_aux->get_peso() << endl;
+    arista_aux = arista_aux->get_arista_siguiente();
+  }
+
+  arista_aux = el_grafo.consulta_vertice(t)->get_arista_adyacente();
+  cout << "vertice t = 20" << endl;
+  while (arista_aux != 0){
+    cout << *arista_aux->get_dato_vertice_adyacente() << endl;
+    cout << arista_aux->get_peso() << endl;
+    arista_aux = arista_aux->get_arista_siguiente();
+  }
+
+  arista_aux = el_grafo.consulta_vertice(r)->get_arista_adyacente();
+  cout << "vertice r = 10" << endl;
+  while (arista_aux != 0){
+    cout << *arista_aux->get_dato_vertice_adyacente() << endl;
+    cout << arista_aux->get_peso() << endl;
+    arista_aux = arista_aux->get_arista_siguiente();
+  }
+
+
   cout << "final"<< endl;
 
   return 0;

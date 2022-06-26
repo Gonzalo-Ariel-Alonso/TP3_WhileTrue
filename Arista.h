@@ -35,6 +35,8 @@ public:
 
 template <typename Dato>
 Arista<Dato>::Arista(){
+  vertice_adyacente = 0;
+  arista_adyacente = 0;
 }
 
 
@@ -49,6 +51,7 @@ Arista<Dato>::~Arista(){
 template <typename Dato>
 Arista<Dato>::Arista(Vertice<Dato> * vertice_adyacente){
     this->vertice_adyacente = vertice_adyacente;
+    this->arista_adyacente = 0;
 }
 
 template <typename Dato>

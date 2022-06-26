@@ -150,14 +150,15 @@ void Grafo<Dato>::eliminar_arista (Dato  origen, Dato  adyacente){
   if( i == 0 && arista_borrar->get_dato_vertice_adyacente() == adyacente ){
     cout << "era la primer arista adyacente a borrar" << endl;
     vertice_origen->set_arista_adyacente(arista_borrar->get_arista_siguiente());
-    delete[] arista_borrar;
+    cout << "borrando arista" << endl;
+    delete arista_borrar;
     cout << "borre la primer arista adyacente" << endl;
   }
   //Si encontro la arista y no es la primera
   else if (arista_borrar->get_dato_vertice_adyacente() == adyacente && i != 0){
     cout << " Encontre la arista adyacente a borrar pero no era la primera" << endl;
     arista_auxiliar->set_arista_siguiente(arista_borrar->get_arista_siguiente());
-    delete[] arista_borrar;
+    delete arista_borrar;
     cout << "borre la arista adyacente a borrar  que no era la primera" << endl;
   }
   //no la encontro
@@ -185,7 +186,7 @@ void Grafo<Dato>::eliminar_vertice(Dato dato){
     cout << "el vertice era el primero" << endl;
     primer_vertice = primer_vertice->get_vertice_siguiente();
     cout << "borrando ........... " << endl;
-    delete [] actual;
+    delete actual;
     cout << "borre el primer vertice" <<endl;
   }
   else{
@@ -197,7 +198,7 @@ void Grafo<Dato>::eliminar_vertice(Dato dato){
       if (actual->get_dato_vertice() == dato ){
           cout << "encontre en el while de eliminar vertice al vertice" << endl;
           anterior->set_vertice_siguiente(actual->get_vertice_siguiente());
-          delete [] actual;
+          delete actual;
           cout << "lo borre " << endl;
       }
     }
