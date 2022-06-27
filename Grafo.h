@@ -288,9 +288,9 @@ void Grafo<Dato>::eliminar_vertice(Dato dato){
   Vertice<Dato> * anterior;
   actual = primer_vertice;
   //si el primer vertice es el que quiero borrar
-
   if (primer_vertice->get_dato_vertice() == dato ){
     primer_vertice = primer_vertice->get_vertice_siguiente();
+
     delete actual;
     cantidad_vertices --;
   }

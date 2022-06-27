@@ -62,7 +62,7 @@ Vertice<Dato>::~Vertice(){
   if (arista_adyacente != 0){
     delete arista_auxiliar;
   }
-
+  delete dato_actual;
 }
 
 
@@ -103,7 +103,7 @@ template <typename Dato>
 void Vertice<Dato>::eliminar_arista(Dato dato){
   Arista<Dato> * actual = arista_adyacente;
   Arista<Dato> * anterior;
-  if ( arista_adyacente != 0){ //se que no hay ayacentes
+  if ( arista_adyacente != 0){ //se que hay ayacentes
     //si es la primer arista ( arista nro 1)
     if ( arista_adyacente->get_vertice_adyacente()->get_dato_vertice() == dato ){
       arista_adyacente = actual->get_arista_siguiente();
@@ -120,7 +120,6 @@ void Vertice<Dato>::eliminar_arista(Dato dato){
           delete actual;
         }
       }
-
     }
   }
 }

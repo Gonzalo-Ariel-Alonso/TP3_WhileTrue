@@ -117,7 +117,6 @@ void Archivos::cargar_grafo(){
 
   }
   lecturas.close();
-
 }
 
 void Archivos::crear_tipo_lectura(char tipo_lectura, string titulo, string duracion_lectura, string ano_publicacion, int referencia_autor, string referencia_a_lectura){

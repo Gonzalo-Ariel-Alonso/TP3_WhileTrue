@@ -2,6 +2,7 @@
 
 Menu::Menu(string archivo_escritores, string archivo_lecturas){
   vector_escritores = new Vector[TAMANIO_VECTOR];
+
   Archivos manejo_archivos(archivo_escritores, vector_escritores,&grafo_completo, archivo_lecturas);
   manejo_archivos.leer_archivo_escritores();
 
@@ -36,7 +37,6 @@ void Menu::opciones_interfaz(int opcion){
           cout << "POSICION " << i << " DEL VECTOR:" << endl;
           vector_escritores[i].imprimir_lista();
         }
-
       }
       break;
     case 3:
