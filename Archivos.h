@@ -28,19 +28,19 @@ TAMAÑO_VECTOR = cantidad elementos / tamaño vector
 
 class Archivos {
 private:
-  Vector vector_escritores[TAMANIO_VECTOR];
+  Vector * vector_escritores;
   string escritores_txt;
   Grafo<Lectura*> * grafo_completo;
   string lecturas_txt;
 
 public:
-  Archivos( string escritores_txt ,Vector vector_escritores[TAMANIO_VECTOR], Grafo<Lectura*> * grafo, string lecturas_txt);
+  Archivos( string escritores_txt ,Vector * vector_escritores, Grafo<Lectura*> * grafo, string lecturas_txt);
   Archivos ( string archivo_escritores_txt );
+  ~Archivos();
   string sacar_parentesis ( string referencia_escritor );
   void leer_archivo_escritores();
-  void carga_vector_escritores(string referencia_escritor, string titulo, string nombre, string nacionalidad, string anio_nacimiento, string anio_fallecimiento);
+  void carga_vector_escritores(string referencia_escritor, string nombre, string nacionalidad, string anio_nacimiento, string anio_fallecimiento);
   int funcion_hashing ( string referencia_escritor );
-  void imprimir_vector();
 
   void cargar_grafo();
   Generos de_string_a_enumerado(string genero_string);

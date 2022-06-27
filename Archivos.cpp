@@ -1,12 +1,17 @@
 #include "Archivos.h"
 
 
-Archivos::Archivos( string escritores_txt ,Vector vector_escritores[TAMANIO_VECTOR], Grafo<Lectura*> * grafo, string lecturas_txt ){
+Archivos::Archivos( string escritores_txt ,Vector * vector_escritores, Grafo<Lectura*> * grafo, string lecturas_txt ){
   this->escritores_txt = escritores_txt;
-  vector_escritores = vector_escritores;
+  this->vector_escritores = vector_escritores;
   this->grafo_completo = grafo;
   this->lecturas_txt = lecturas_txt;
 
+}
+
+Archivos::~Archivos(){
+  vector_escritores = 0;
+  grafo_completo = 0;
 }
 
 
@@ -46,14 +51,14 @@ void Archivos::leer_archivo_escritores(){
         if (anio_fallecimiento != ""){
             getline(escritores,vacio);
         }
-
+        carga_vector_escritores(referencia_escritor, nombre, nacionalidad, anio_nacimiento, anio_fallecimiento);
         pos++;
         anio_fallecimiento = ""; anio_nacimiento = "";
     }
     escritores.close();
 }
 
-void Archivos::carga_vector_escritores(string referencia_escritor,string titulo ,string nombre, string nacionalidad, string anio_nacimiento, string anio_fallecimiento){
+void Archivos::carga_vector_escritores(string referencia_escritor,string nombre, string nacionalidad, string anio_nacimiento, string anio_fallecimiento){
   //crear objeto escritor
   referencia_escritor = sacar_parentesis(referencia_escritor);
   int pos = funcion_hashing(referencia_escritor);
@@ -61,14 +66,6 @@ void Archivos::carga_vector_escritores(string referencia_escritor,string titulo 
   Escritor* aux = new Escritor(referencia_escritor_entero,nombre,nacionalidad,anio_nacimiento,anio_fallecimiento);
   vector_escritores[pos].agregar_objeto(aux);
   //AGREGARLO AL VECTOR
-}
-
-void Archivos::imprimir_vector(){
-  for(int i = 0; i < TAMANIO_VECTOR; i++){
-    cout << endl << " --------------------" << endl;
-    cout << "POSICION " << i << " DEL VECTOR:" << endl;
-    vector_escritores[i].imprimir_lista();
-  }
 }
 
 Generos Archivos::de_string_a_enumerado(string genero_string){

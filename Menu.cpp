@@ -1,6 +1,7 @@
 #include "Menu.h"
 
 Menu::Menu(string archivo_escritores, string archivo_lecturas){
+  vector_escritores = new Vector[TAMANIO_VECTOR];
   Archivos manejo_archivos(archivo_escritores, vector_escritores,&grafo_completo, archivo_lecturas);
   manejo_archivos.leer_archivo_escritores();
 
@@ -11,7 +12,7 @@ Menu::Menu(string archivo_escritores, string archivo_lecturas){
 }
 
 Menu::~Menu(){
-
+  delete [] vector_escritores;
 }
 
 void Menu::opciones_interfaz(int opcion){
@@ -22,6 +23,16 @@ void Menu::opciones_interfaz(int opcion){
       cout << endl << endl;
       break;
     case 2:
+      system("clear");
+      cout << "TABLA HASH" << endl;
+      for(int i = 0; i < TAMANIO_VECTOR; i++){
+        if (vector_escritores[i].get_cantidad_anidados() != 0){
+          cout << endl << " --------------------" << endl;
+          cout << "POSICION " << i << " DEL VECTOR:" << endl;
+          vector_escritores[i].imprimir_lista();
+        }
+
+      }
       break;
     case 3:
       break;
@@ -40,7 +51,7 @@ void Menu::opciones_interfaz(int opcion){
 void Menu::mostrar_menu(){
     cout << "\tBienvenido! Elija una opcion: " << endl;
     cout << "\t\t1 - Imprimir grafo" << endl;
-    cout << "\t\t2 - Quitar una lectura de la lista" << endl;
+    cout << "\t\t2 - Imprimir tabla hash" << endl;
     cout << "\t\t3 - Agregar un escritor" << endl;
     cout << "\t\t4 - Salir" << endl;
 }

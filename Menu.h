@@ -17,7 +17,7 @@ using namespace std;
 class Menu {
 private:
 
-  Vector vector_escritores[TAMANIO_VECTOR];
+  Vector * vector_escritores;
   Grafo<Lectura *> grafo_completo;
 
 
