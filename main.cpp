@@ -1,13 +1,12 @@
 #include <iostream>
 
-#include "Archivos.h"
+#include "Menu.h"
 
 using namespace std;
 
 int main(){
-
-  Archivos archivo_escritores("escritores.txt");
-  archivo_escritores.crear_vector_escritores();
-  archivo_escritores.imprimir_vector();
+  system ("clear");
+  Menu un_menu("escritores.txt", "lecturas.txt");
+  un_menu.interfaz_usuario_con_ingreso();
   return 0;
 }

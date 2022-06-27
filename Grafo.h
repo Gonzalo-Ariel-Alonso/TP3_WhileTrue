@@ -8,7 +8,7 @@
 #include "Lectura.h"
 
 #include "Descanso_entre_lecturas.h"
-#include "Tipo_de_lecturas.h"
+#include "Tipos_de_lecturas.h"
 
 using namespace std;
 
@@ -39,7 +39,7 @@ class Grafo{
         */
         void agregar_vertice(Dato  vertice_nuevo);
 
-        void grafo_completo();
+        void transformar_a_grafo_completo();
 
         int calcular_costo_arista(Lectura * origen, Lectura * adyacente );
 
@@ -73,6 +73,8 @@ class Grafo{
         void eliminar_vertice(Dato dato);
 
         void eliminar_arista (Dato  origen, Dato  adyacente);
+
+        void imprimir_grafo();
         //Destructor
         ~Grafo();
 };
@@ -182,15 +184,14 @@ void Grafo<Dato>::agregar_arista(Dato  origen, Dato  adyacente, int costo_arista
 }
 
 template <typename Dato>
-void Grafo<Dato>::grafo_completo(){
+void Grafo<Dato>::transformar_a_grafo_completo(){
   Vertice<Dato> * vertice_origen = primer_vertice;
   Vertice<Dato> * vertice_llegada = primer_vertice;
   Dato * dato_vertice_origen ;
   Dato * dato_vertice_adyacente;
   for (int i = 1; i <= cantidad_vertices; i++){
-    dato_vertice_adyacente = vertice_origen->get_dato_vertice();
+    dato_vertice_origen = vertice_origen->get_dato_vertice();
     for (int j = 1; j <= cantidad_vertices; i++){
-      dato_vertice_origen = vertice_origen->get_dato_vertice();
       dato_vertice_adyacente = vertice_llegada->get_dato_vertice();
       if ( dato_vertice_origen != dato_vertice_adyacente ){
         int costo = calcular_costo_arista(dato_vertice_origen, dato_vertice_adyacente);
@@ -307,6 +308,26 @@ void Grafo<Dato>::eliminar_vertice(Dato dato){
     }
   }
 
+}
+
+template < typename Dato >
+void Grafo<Dato>::imprimir_grafo(){
+  Vertice<Dato> * vertice_origen = primer_vertice;
+  Arista<Dato> * arista_entre_vertices = vertice_origen->get_arista_adyacente();
+  Dato * dato_vertice_origen ;
+  Dato * dato_vertice_adyacente ;
+  cout << "GRAFO COMPLETO" << endl;
+  for (int i = 1; i <= cantidad_vertices; i++){
+    dato_vertice_origen = vertice_origen->get_dato_vertice();
+    cout << endl << endl << "VERTICE ---COSTO---> ADYACENTES" << endl;
+    cout << dato_vertice_origen->get_titulo() ;
+    while (arista_entre_vertices != 0){
+      dato_vertice_adyacente = arista_entre_vertices->get_vertice_adyacente();
+      cout << "-----" arista_entre_vertices->get_peso() << "----->" << dato_vertice_adyacente->get_titulo();
+      arista_entre_vertices = arista_entre_vertices->get_arista_siguiente();
+    }
+    vertice_origen = vertice_origen->get_vertice_siguiente();
+  }
 }
 
 //Destructor
