@@ -6,9 +6,8 @@
 #include "Vertice.h"
 #include "Arista.h"
 #include "Lectura.h"
-
 #include "Descanso_entre_lecturas.h"
-#include "Tipos_de_lecturas.h"
+#include "Tipo_de_lecturas.h"
 
 using namespace std;
 
@@ -43,7 +42,7 @@ class Grafo{
 
         int calcular_costo_arista(Lectura * origen, Lectura * adyacente );
 
-        Tipo_de_lectura de_char_a_enumerado(char char_tipo_lectura);
+        Tipo_de_lecturas de_char_a_enumerado(char char_tipo_lectura);
 
         void conectar_nuevo_vertice_con_todos(Dato nuevo_dato);
 
@@ -187,8 +186,8 @@ template <typename Dato>
 void Grafo<Dato>::transformar_a_grafo_completo(){
   Vertice<Dato> * vertice_origen = primer_vertice;
   Vertice<Dato> * vertice_llegada = primer_vertice;
-  Dato * dato_vertice_origen ;
-  Dato * dato_vertice_adyacente;
+  Dato dato_vertice_origen ;
+  Dato dato_vertice_adyacente;
   for (int i = 1; i <= cantidad_vertices; i++){
     dato_vertice_origen = vertice_origen->get_dato_vertice();
     for (int j = 1; j <= cantidad_vertices; i++){
@@ -208,7 +207,7 @@ template <typename Dato>
 int Grafo<Dato>::calcular_costo_arista(Lectura * origen, Lectura * adyacente ){
   int costo;
   Tipo_de_lecturas lectura_origen;
-  Tipo_de_lectura lectura_adyacente;
+  Tipo_de_lecturas lectura_adyacente;
   lectura_origen = de_char_a_enumerado(origen->get_tipo_de_objeto());
   lectura_adyacente = de_char_a_enumerado(adyacente->get_tipo_de_objeto());
   Descanso_entre_lecturas costo_de_la_arista(lectura_origen , lectura_adyacente);
@@ -217,19 +216,19 @@ int Grafo<Dato>::calcular_costo_arista(Lectura * origen, Lectura * adyacente ){
 }
 
 template <typename Dato>
-Tipo_de_lectura Grafo<Dato>::de_char_a_enumerado(char char_tipo_lectura){
+Tipo_de_lecturas Grafo<Dato>::de_char_a_enumerado(char char_tipo_lectura){
 
-  Tipo_de_lecturas tipo_de_lectura;
+  Tipo_de_lecturas Tipo_de_lecturas;
   if(char_tipo_lectura  == 'N')
-    tipo_de_lectura = NOVELA;
+    Tipo_de_lecturas = NOVELA;
   else if (char_tipo_lectura == 'C')
-    tipo_de_lectura = CUENTO;
+    Tipo_de_lecturas = CUENTO;
   else if (char_tipo_lectura  == 'P')
-    tipo_de_lectura = POEMA;
+    Tipo_de_lecturas = POEMA;
   else if (char_tipo_lectura  == 'H')
-    tipo_de_lectura = NOVELA_HISTORICA;
+    Tipo_de_lecturas = NOVELA_HISTORICA;
 
-  return tipo_de_lectura;
+  return Tipo_de_lecturas;
 
 }
 
@@ -314,16 +313,16 @@ template < typename Dato >
 void Grafo<Dato>::imprimir_grafo(){
   Vertice<Dato> * vertice_origen = primer_vertice;
   Arista<Dato> * arista_entre_vertices = vertice_origen->get_arista_adyacente();
-  Dato * dato_vertice_origen ;
-  Dato * dato_vertice_adyacente ;
+  Dato  dato_vertice_origen ;
+  Dato  dato_vertice_adyacente ;
   cout << "GRAFO COMPLETO" << endl;
   for (int i = 1; i <= cantidad_vertices; i++){
     dato_vertice_origen = vertice_origen->get_dato_vertice();
     cout << endl << endl << "VERTICE ---COSTO---> ADYACENTES" << endl;
     cout << dato_vertice_origen->get_titulo() ;
     while (arista_entre_vertices != 0){
-      dato_vertice_adyacente = arista_entre_vertices->get_vertice_adyacente();
-      cout << "-----" arista_entre_vertices->get_peso() << "----->" << dato_vertice_adyacente->get_titulo();
+      dato_vertice_adyacente = arista_entre_vertices->get_vertice_adyacente()->get_dato_vertice();
+      cout << "-----" << arista_entre_vertices->get_peso() << "----->" << dato_vertice_adyacente->get_titulo();
       arista_entre_vertices = arista_entre_vertices->get_arista_siguiente();
     }
     vertice_origen = vertice_origen->get_vertice_siguiente();

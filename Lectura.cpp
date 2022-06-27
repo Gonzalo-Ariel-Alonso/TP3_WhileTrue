@@ -49,5 +49,4 @@ void Lectura::mostrar_filtrado_por_genero(Generos genero_a_filtrar){
 }
 
 Lectura::~Lectura(){
-    autor = 0;
 }

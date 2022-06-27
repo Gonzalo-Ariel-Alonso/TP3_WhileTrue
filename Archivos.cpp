@@ -1,5 +1,4 @@
 #include "Archivos.h"
-#include "Vector.h"
 
 
 Archivos::Archivos( string escritores_txt ,Vector vector_escritores[TAMANIO_VECTOR], Grafo<Lectura*> * grafo, string lecturas_txt ){

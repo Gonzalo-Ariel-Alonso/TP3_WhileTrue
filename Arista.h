@@ -7,7 +7,6 @@
 
 
 using namespace std;
-#include "Descanso_entre_lecturas.h"
 
 template <typename Dato>
 class Vertice;

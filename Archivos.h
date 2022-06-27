@@ -7,7 +7,7 @@
 
 #include "Vector.h"
 #include "Grafo.h"
-#include "Tipos_de_lecturas.h"
+#include "Tipo_de_lecturas.h"
 #include "Escritor.h"
 #include "Lectura.h"
 #include "Novela_historica.h"
@@ -15,7 +15,6 @@
 #include "Cuento.h"
 #include "Poema.h"
 #include "Genero.h"
-#include "Grafo.h"
 
 
 using namespace std;

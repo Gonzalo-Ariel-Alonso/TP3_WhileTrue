@@ -6,14 +6,9 @@
 
 #include "Archivos.h"
 #include "Lista.h"
-#include "Escritor.h"
 #include "Lectura.h"
-#include "Novela_historica.h"
-#include "Novela.h"
-#include "Cuento.h"
-#include "Poema.h"
-#include "Genero.h"
 #include "Grafo.h"
+#include "Vector.h"
 
 #define TAMANIO_VECTOR 25
 

@@ -10,8 +10,9 @@ void Vector::agregar_objeto ( Escritor* nuevo_escritor ){
 
 void Vector::eliminar_objeto ( string objeto_sacar ){
   int tamanio = lista_objetos.obtener_cantidad();
+  int _objeto_sacar = stoi(objeto_sacar);
   for(int i = 1; i <= tamanio; i++){
-    if (lista_objetos.consulta(i)->obtener_referencia() == objeto_sacar){
+    if ( lista_objetos.consulta(i)->obtener_referencia() == _objeto_sacar){
       lista_objetos.baja(i);
       cantidad_anidados --;
     }

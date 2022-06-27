@@ -3,11 +3,11 @@
 
 #include <iostream>
 #include <string>
-using namespace std;
 
 #include "Lectura.h"
 #include "Escritor.h"
 
+using namespace std;
 
 class Cuento : public Lectura {
 private:
