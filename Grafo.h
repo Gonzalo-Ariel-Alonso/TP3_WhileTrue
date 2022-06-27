@@ -255,18 +255,18 @@ void Grafo<Dato>::eliminar_arista (Dato  origen, Dato  adyacente){
   }
   //si no entro al while y es la primera arista adyacente
   if( i == 0 && arista_borrar->get_dato_vertice_adyacente() == adyacente ){
-    cout << "era la primer arista adyacente a borrar" << endl;
     vertice_origen->set_arista_adyacente(arista_borrar->get_arista_siguiente());
-    cout << "borrando arista" << endl;
     delete arista_borrar;
-    cout << "borre la primer arista adyacente" << endl;
   }
   //Si encontro la arista y no es la primera
   else if (arista_borrar->get_dato_vertice_adyacente() == adyacente && i != 0){
-    cout << " Encontre la arista adyacente a borrar pero no era la primera" << endl;
     arista_auxiliar->set_arista_siguiente(arista_borrar->get_arista_siguiente());
     delete arista_borrar;
-    cout << "borre la arista adyacente a borrar  que no era la primera" << endl;
+  }
+  //creo que este else if es al pedo
+  else if (arista_borrar->get_dato_vertice_adyacente() == adyacente && arista_borrar->get_vertice_adyacente() == 0){
+    arista_auxiliar->set_arista_siguiente(0);
+    delete arista_borrar;
   }
   //no la encontro
   else{
@@ -280,6 +280,7 @@ void Grafo<Dato>::eliminar_vertice(Dato dato){
 
   //recorre por cada vertice sus adyacencias con el vertice a borrar
   for (int i = 1; i <= cantidad_vertices; i++){ //ver la condicion que no se pase
+    //eliminar_arista(actual->get_dato_vertice(),dato);
     actual->eliminar_arista(dato);
     actual = actual->get_vertice_siguiente(); // proximo vertice
   }
@@ -315,25 +316,31 @@ void Grafo<Dato>::eliminar_vertice(Dato dato){
 
 template < typename Dato >
 void Grafo<Dato>::imprimir_grafo(){
-  Vertice<Dato> * vertice_origen = primer_vertice; // vertice origen
-  Arista<Dato> * arista_entre_vertices = vertice_origen->get_arista_adyacente();
-  Dato  dato_vertice_origen ;
-  Dato  dato_vertice_adyacente ;
-  cout << "GRAFO COMPLETO" << endl;
-  for (int i = 1; i <= cantidad_vertices; i++){
-    dato_vertice_origen = vertice_origen->get_dato_vertice();
-    cout << endl << endl << "VERTICE ---COSTO---> ADYACENTES" << endl;
-    cout << dato_vertice_origen->get_titulo();
-    while (arista_entre_vertices != 0){
-      dato_vertice_adyacente = arista_entre_vertices->get_vertice_adyacente()->get_dato_vertice();
-      cout << "---" << arista_entre_vertices->get_peso() << "--->" << dato_vertice_adyacente->get_titulo();
-      arista_entre_vertices = arista_entre_vertices->get_arista_siguiente();
-    }
-    if( vertice_origen->get_vertice_siguiente() != 0 ){
-      vertice_origen = vertice_origen->get_vertice_siguiente();
-      arista_entre_vertices = vertice_origen->get_arista_adyacente();
-    }
+  if (cantidad_vertices > 0){
+    Vertice<Dato> * vertice_origen = primer_vertice; // vertice origen
+    Arista<Dato> * arista_entre_vertices = vertice_origen->get_arista_adyacente();
+    Dato  dato_vertice_origen ;
+    Dato  dato_vertice_adyacente ;
+    cout << endl;
 
+
+
+    cout << "GRAFO COMPLETO" << endl;
+    for (int i = 1; i <= cantidad_vertices; i++){
+      dato_vertice_origen = vertice_origen->get_dato_vertice();
+      cout << endl << endl << "VERTICE ---COSTO---> ADYACENTES" << endl;
+      cout << dato_vertice_origen->get_titulo();
+      while (arista_entre_vertices != 0){
+        dato_vertice_adyacente = arista_entre_vertices->get_vertice_adyacente()->get_dato_vertice();
+        cout << "---" << arista_entre_vertices->get_peso() << "--->" << dato_vertice_adyacente->get_titulo();
+        arista_entre_vertices = arista_entre_vertices->get_arista_siguiente();
+      }
+      if( vertice_origen->get_vertice_siguiente() != 0 ){
+        vertice_origen = vertice_origen->get_vertice_siguiente();
+        arista_entre_vertices = vertice_origen->get_arista_adyacente();
+      }
+
+    }
   }
 }
 
@@ -342,6 +349,8 @@ template<typename Dato>
 Grafo<Dato>::~Grafo(){
   while (!vacia()){
     eliminar_vertice(primer_vertice->get_dato_vertice());
+    cout << endl << "CANTIDAD DE VERTICES" << cantidad_vertices << endl;
+    imprimir_grafo();
   }
 }
 
