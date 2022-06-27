@@ -23,6 +23,11 @@ void Menu::opciones_interfaz(int opcion){
       cout << endl << endl;
       break;
     case 2:
+
+    /*
+      HAY QUE ARMARLE UNA FUNCION ASI NO SE HACE EN EL SWITCH
+      SOLO LA USE ACA PARA PROBAR QUE FUNCIONE BIEN
+      */
       system("clear");
       cout << "TABLA HASH" << endl;
       for(int i = 0; i < TAMANIO_VECTOR; i++){
