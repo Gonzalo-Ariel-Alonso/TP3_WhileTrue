@@ -52,22 +52,17 @@ Vertice<Dato>::Vertice ( Dato dato ){
 template <typename Dato>
 Vertice<Dato>::~Vertice(){
   //voy a borrar solo las aristas del vertice aca
-  cout << "vertice destructor" << endl;
 
-  Arista<Dato> * arista_auxiliar = arista_adyacente; //agarra al primero
-  cout << "hola" << endl;
-
+  Arista<Dato> * arista_auxiliar; //agarra al primero
   while( arista_adyacente != 0 ){
-    cout << "entre al while" << endl;
+    arista_auxiliar = arista_adyacente;
     arista_adyacente = arista_adyacente->get_arista_siguiente(); //el primero pasa a ser el segundo
     delete arista_auxiliar; //SE BORRA LA ARISTA;
   }
-  cout << "voy a borrar la arista auxiliar" << endl;
   if (arista_adyacente != 0){
     delete arista_auxiliar;
   }
 
-  cout << "termine el destructor de vertice " << endl;
 }
 
 
@@ -111,30 +106,21 @@ void Vertice<Dato>::eliminar_arista(Dato dato){
   if ( arista_adyacente != 0){ //se que no hay ayacentes
     //si es la primer arista ( arista nro 1)
     if ( arista_adyacente->get_vertice_adyacente()->get_dato_vertice() == dato ){
-      cout << "voy a eliminar la primer arista" << endl;
       arista_adyacente = actual->get_arista_siguiente();
       delete actual;
-      cout << "Termine de eliminar la primer arista " << endl;
     }
     //Else si son las otras
     else{
-      cout << "voy a eliminar una arista si esta" << endl;
       //mientras que no llegue al ultimo puntero nullo y en este caso no entra ya
       while (actual != 0 && actual->get_arista_siguiente() != 0){
-        cout << "entre al while" << endl;
         anterior = actual;
-
-
         actual = actual->get_arista_siguiente(); //actual = 0;
         if(actual->get_vertice_adyacente()->get_dato_vertice() == dato ){
-          cout << "encontre la arista a eliminar" <<endl;
           anterior->set_arista_siguiente(actual->get_arista_siguiente());
           delete actual;
-          cout << "la elimine" << endl;
-
         }
       }
-      cout << "termine buscar la arista a eliminar" << endl;
+
     }
   }
 }

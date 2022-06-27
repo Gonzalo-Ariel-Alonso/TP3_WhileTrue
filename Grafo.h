@@ -249,7 +249,6 @@ void Grafo<Dato>::eliminar_arista (Dato  origen, Dato  adyacente){
   Arista<Dato> * arista_auxiliar;
 
   while( arista_borrar->get_dato_vertice_adyacente() != adyacente && arista_borrar->get_arista_siguiente() != 0 ){
-    cout << "entre al while" << endl;
     arista_auxiliar = arista_borrar; //uno anterior al borrado
     arista_borrar = arista_borrar->get_arista_siguiente();
     i++;
@@ -281,8 +280,6 @@ void Grafo<Dato>::eliminar_vertice(Dato dato){
 
   //recorre por cada vertice sus adyacencias con el vertice a borrar
   for (int i = 1; i <= cantidad_vertices; i++){ //ver la condicion que no se pase
-    cout << "estoy en el for borrando los caminos que van al vertice borrado" << endl;
-    cout << "iteracion " << i << endl;
     actual->eliminar_arista(dato);
     actual = actual->get_vertice_siguiente(); // proximo vertice
   }
@@ -290,12 +287,14 @@ void Grafo<Dato>::eliminar_vertice(Dato dato){
   Vertice<Dato> * anterior;
   actual = primer_vertice;
   //si el primer vertice es el que quiero borrar
+
   if (primer_vertice->get_dato_vertice() == dato ){
-    cout << "el vertice era el primero" << endl;
     primer_vertice = primer_vertice->get_vertice_siguiente();
-    cout << "borrando ........... " << endl;
     delete actual;
-    cout << "borre el primer vertice" <<endl;
+    cantidad_vertices --;
+  }
+  else if(cantidad_vertices == 1) {
+    delete primer_vertice;
     cantidad_vertices --;
   }
   else{
@@ -305,11 +304,9 @@ void Grafo<Dato>::eliminar_vertice(Dato dato){
       anterior = actual;
       actual = actual->get_vertice_siguiente();
       if (actual->get_dato_vertice() == dato ){
-          cout << "encontre en el while de eliminar vertice al vertice" << endl;
           anterior->set_vertice_siguiente(actual->get_vertice_siguiente());
           delete actual;
           cantidad_vertices--;
-          cout << "lo borre " << endl;
       }
     }
   }
@@ -343,9 +340,7 @@ void Grafo<Dato>::imprimir_grafo(){
 //Destructor
 template<typename Dato>
 Grafo<Dato>::~Grafo(){
-  cout << "destructor grafo" << endl;
   while (!vacia()){
-    cout << "borre vertice: 1" << endl;
     eliminar_vertice(primer_vertice->get_dato_vertice());
   }
 }

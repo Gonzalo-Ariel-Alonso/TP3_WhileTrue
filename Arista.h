@@ -41,10 +41,8 @@ Arista<Dato>::Arista(){
 
 template <typename Dato>
 Arista<Dato>::~Arista(){
-    cout << "destructor Arista" << endl;
     arista_adyacente = nullptr;
     vertice_adyacente = nullptr;
-    cout << "Termine de destruir la arista" << endl;
 }
 
 template <typename Dato>
