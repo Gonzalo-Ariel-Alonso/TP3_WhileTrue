@@ -349,8 +349,6 @@ template<typename Dato>
 Grafo<Dato>::~Grafo(){
   while (!vacia()){
     eliminar_vertice(primer_vertice->get_dato_vertice());
-    cout << endl << "CANTIDAD DE VERTICES" << cantidad_vertices << endl;
-    imprimir_grafo();
   }
 }
 
