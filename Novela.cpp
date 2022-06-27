@@ -1,7 +1,7 @@
 #include "Novela.h"
 
-Novela::Novela(char tipo_de_objeto, string titulo, int tiempo_lectura, int anio, int referencia_autor, Generos genero):
-Lectura(tipo_de_objeto, titulo, tiempo_lectura, anio, referencia_autor) {
+Novela::Novela(char tipo_de_lectura, string titulo, int tiempo_lectura, int anio, int referencia_autor, Generos genero):
+Lectura(tipo_de_lectura, titulo, tiempo_lectura, anio, referencia_autor) {
     this->genero = genero;
 };
 
@@ -13,7 +13,6 @@ void Novela::mostrar(){
     cout << "Año de publicacion: " << anio << endl;
     //if (autor != nullptr ){autor->mostrar_datos();}
     cout << "Genero: " << de_enumerado_a_string(genero) << endl;
-    //FALTARIA EL ESCRITOR PERO HAY QUE VER CON EL GRUPO
 }
 
 string Novela::de_enumerado_a_string(Generos genero){

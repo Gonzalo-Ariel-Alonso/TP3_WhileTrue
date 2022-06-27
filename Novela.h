@@ -18,7 +18,7 @@ public:
 
   //PRE: Recibe los datos a almacenar
   //POST: Almacena los datos recibidos
-    Novela(char tipo_de_objeto, string titulo, int tiempo_lectura, int anio , int referencia_autor , Generos genero);
+    Novela(char tipo_de_lectura, string titulo, int tiempo_lectura, int anio , int referencia_autor , Generos genero);
     ~Novela()=default;
 
     //PRE:

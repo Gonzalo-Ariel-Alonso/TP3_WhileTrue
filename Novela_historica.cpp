@@ -1,8 +1,8 @@
 #include "Novela_historica.h"
 
 
-Novela_historica::Novela_historica(char tipo_de_objeto, string titulo, int tiempo_lectura, int anio, int referencia_autor, Generos genero, string tema_string)
-:Novela(tipo_de_objeto, titulo, tiempo_lectura, anio, referencia_autor, genero)
+Novela_historica::Novela_historica(char tipo_de_lectura, string titulo, int tiempo_lectura, int anio, int referencia_autor, Generos genero, string tema_string)
+:Novela(tipo_de_lectura, titulo, tiempo_lectura, anio, referencia_autor, genero)
 {
   tamanio_char = tema_string.length();
   tema = new char[tamanio_char];

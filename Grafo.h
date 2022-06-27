@@ -42,8 +42,6 @@ class Grafo{
 
         int calcular_costo_arista(Lectura * origen, Lectura * adyacente );
 
-        Tipo_de_lecturas de_char_a_enumerado(char char_tipo_lectura);
-
         void conectar_nuevo_vertice_con_todos(Dato nuevo_dato);
 
         void conectar_todos_los_vertices_con_el_nuevo(Dato nuevo_dato);
@@ -213,30 +211,11 @@ void Grafo<Dato>::transformar_a_grafo_completo(){
 template <typename Dato>
 int Grafo<Dato>::calcular_costo_arista(Lectura * origen, Lectura * adyacente ){
   int costo;
-  Tipo_de_lecturas lectura_origen;
-  Tipo_de_lecturas lectura_adyacente;
-  lectura_origen = de_char_a_enumerado(origen->get_tipo_de_objeto());
-  lectura_adyacente = de_char_a_enumerado(adyacente->get_tipo_de_objeto());
+  Tipo_de_lecturas lectura_origen = origen->get_tipo_de_lectura();
+  Tipo_de_lecturas lectura_adyacente = adyacente->get_tipo_de_lectura();
   Descanso_entre_lecturas costo_de_la_arista(lectura_origen , lectura_adyacente);
   costo = costo_de_la_arista.get_tiempo_de_descanso();
   return costo;
-}
-
-template <typename Dato>
-Tipo_de_lecturas Grafo<Dato>::de_char_a_enumerado(char char_tipo_lectura){
-
-  Tipo_de_lecturas Tipo_de_lecturas;
-  if(char_tipo_lectura  == 'N')
-    Tipo_de_lecturas = NOVELA;
-  else if (char_tipo_lectura == 'C')
-    Tipo_de_lecturas = CUENTO;
-  else if (char_tipo_lectura  == 'P')
-    Tipo_de_lecturas = POEMA;
-  else if (char_tipo_lectura  == 'H')
-    Tipo_de_lecturas = NOVELA_HISTORICA;
-
-  return Tipo_de_lecturas;
-
 }
 
 
@@ -321,20 +300,19 @@ void Grafo<Dato>::imprimir_grafo(){
     Arista<Dato> * arista_entre_vertices = vertice_origen->get_arista_adyacente();
     Dato  dato_vertice_origen ;
     Dato  dato_vertice_adyacente ;
-    cout << endl;
 
-
-
-    cout << "GRAFO COMPLETO" << endl;
+    cout << "\nGRAFO COMPLETO\n";
+    cout << "\nLECTURA ---TIEMPO DE DESCANSO(min)--->LECTURAS SIGUIENTES\n\n";
+    //cout << "\nVERTICE ---TIEMPO_DE_DESCANSO--->VERTICES ADYACENTES\n\n";
     for (int i = 1; i <= cantidad_vertices; i++){
       dato_vertice_origen = vertice_origen->get_dato_vertice();
-      cout << endl << endl << "VERTICE ---COSTO---> ADYACENTES" << endl;
       cout << dato_vertice_origen->get_titulo();
       while (arista_entre_vertices != 0){
         dato_vertice_adyacente = arista_entre_vertices->get_vertice_adyacente()->get_dato_vertice();
         cout << "---" << arista_entre_vertices->get_peso() << "--->" << dato_vertice_adyacente->get_titulo();
         arista_entre_vertices = arista_entre_vertices->get_arista_siguiente();
       }
+      cout << "\n";
       if( vertice_origen->get_vertice_siguiente() != 0 ){
         vertice_origen = vertice_origen->get_vertice_siguiente();
         arista_entre_vertices = vertice_origen->get_arista_adyacente();

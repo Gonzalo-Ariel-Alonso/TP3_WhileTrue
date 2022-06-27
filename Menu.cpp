@@ -17,11 +17,11 @@ Menu::~Menu(){
 }
 
 void Menu::opciones_interfaz(int opcion){
-  switch (opcion){
+  switch (opcion){  
     case 1:
       system("clear");
       grafo_completo.imprimir_grafo();
-      cout << endl << endl;
+      cout << "\n";
       break;
     case 2:
 
@@ -54,11 +54,11 @@ void Menu::opciones_interfaz(int opcion){
 
 
 void Menu::mostrar_menu(){
-    cout << "\tBienvenido! Elija una opcion: " << endl;
-    cout << "\t\t1 - Imprimir grafo" << endl;
-    cout << "\t\t2 - Imprimir tabla hash" << endl;
-    cout << "\t\t3 - Agregar un escritor" << endl;
-    cout << "\t\t4 - Salir" << endl;
+    cout << "Elija una opcion: " << endl;
+    cout << "\t1 - Imprimir grafo" << endl;
+    cout << "\t2 - Imprimir tabla hash" << endl;
+    cout << "\t3 - Agregar un escritor" << endl;
+    cout << "\t4 - Salir" << endl;
 }
 
 

@@ -15,7 +15,7 @@ private:
 public:
   //PRE:Recibe los parametros para cargar el objeto padre e hijo
   //POST:Almacena los datos
-    Cuento (char tipo_de_objeto, string titulo, int tiempo_lectura, int anio , int referencia_autor , string titulo_de_libro);
+    Cuento (char tipo_de_lectura, string titulo, int tiempo_lectura, int anio , int referencia_autor , string titulo_de_libro);
     ~Cuento()=default;
     //PRE:----
     //POST:Imprime los datos por pantalla

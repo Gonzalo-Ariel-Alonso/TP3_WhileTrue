@@ -13,7 +13,7 @@ public:
 
   //PRE: Recibe por parametro los datos a almacenar
   //POST: Almacena los datos recibidos
-    Poema (char tipo_de_objeto, string titulo, int tiempo_lectura, int anio , int referencia_autor , int versos);
+    Poema (char tipo_de_lectura, string titulo, int tiempo_lectura, int anio , int referencia_autor , int versos);
     ~Poema()=default;
 
     //PRE:

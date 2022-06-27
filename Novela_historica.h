@@ -14,7 +14,7 @@ public:
 
     //PRE: Recibe los datos a almacenar
     //POST: Almacena los datos
-    Novela_historica(char tipo_de_objeto, string titulo, int tiempo_lectura, int anio , int referencia_autor , Generos genero, string tema_string);
+    Novela_historica(char tipo_de_lectura, string titulo, int tiempo_lectura, int anio , int referencia_autor , Generos genero, string tema_string);
 
     //PRE:
     //POST: Libera la memoria pedida durante el programa
