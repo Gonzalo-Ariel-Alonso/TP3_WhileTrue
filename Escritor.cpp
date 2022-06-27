@@ -4,7 +4,13 @@
 Escritor::Escritor(string _referencia,string _nombre_y_apellido,string _nacionalidad,string _anio_nacimiento,string _anio_fallecimiento){
     referencia = _referencia;
     nombre_y_apellido = _nombre_y_apellido;
-    nacionalidad = _nacionalidad;
+    if (nacionalidad == "¿?"){
+      nacionalidad = "desconocido";
+    }
+    else{
+      nacionalidad = _nacionalidad;
+    }
+
     if (_anio_nacimiento == "" || _anio_nacimiento == "0")
         anio_nacimiento = "desconocido";
     else
