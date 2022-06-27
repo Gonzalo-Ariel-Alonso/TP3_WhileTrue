@@ -1,10 +1,11 @@
 #include "Archivos.h"
+#include "Vector.h"
 
 
 Archivos::Archivos( string escritores_txt ,Vector vector_escritores[TAMANIO_VECTOR], Grafo<Lectura*> * grafo, string lecturas_txt ){
   this->escritores_txt = escritores_txt;
-  this->vector_escritores = vectore_escritores;
-  grafo_completo = grafo;
+  vector_escritores = vector_escritores;
+  this->grafo_completo = grafo;
   this->lecturas_txt = lecturas_txt;
 
 }
@@ -53,11 +54,12 @@ void Archivos::leer_archivo_escritores(){
     escritores.close();
 }
 
-void Archivos::carga_vector_escritores(string referencia_escritor, string nombre, string nacionalidad, string anio_nacimiento, string anio fallecimiento){
+void Archivos::carga_vector_escritores(string referencia_escritor,string titulo ,string nombre, string nacionalidad, string anio_nacimiento, string anio_fallecimiento){
   //crear objeto escritor
   referencia_escritor = sacar_parentesis(referencia_escritor);
-  pos = funcion_hashing(referencia_escritor);
-  Escritor* aux = new Escritor(referencia_escritor,nombre,nacionalidad,anio_nacimiento,anio_fallecimiento);
+  int pos = funcion_hashing(referencia_escritor);
+  int referencia_escritor_entero = stoi(referencia_escritor);
+  Escritor* aux = new Escritor(referencia_escritor_entero,nombre,nacionalidad,anio_nacimiento,anio_fallecimiento);
   vector_escritores[pos].agregar_objeto(aux);
   //AGREGARLO AL VECTOR
 }
@@ -92,7 +94,7 @@ Generos Archivos::de_string_a_enumerado(string genero_string){
 void Archivos::cargar_grafo(){
   ifstream lecturas;
   lecturas.open(lecturas_txt);
-  string tipo_lecturas, titulo, duracion_lectura, ano_publicacion, referencia_a_lectura, tema_novela_historica, referencia_a_escritor, vacio;
+  string tipo_lecturas, titulo, duracion_lectura, ano_publicacion, referencia_a_lectura, tema_novela_historica,referencia_a_escritor, vacio;
   while (!lecturas.eof()){
       getline(lecturas,tipo_lecturas);
       getline(lecturas,titulo);
@@ -106,12 +108,13 @@ void Archivos::cargar_grafo(){
       getline(lecturas,vacio);
 
       char tipo_lectura = tipo_lecturas.at(0);
+      int referencia_a_escritor = referencia_a_escritor;
 
       if ( tema_novela_historica != "" ){
-        crear_tipo_lectura(tipo_lectura, titulo, duracion_lectura, ano_publicacion, referencia_autor, referencia_a_lectura, tema_novela_historica);
+        crear_tipo_lectura(tipo_lectura, titulo, duracion_lectura, ano_publicacion, referencia_a_escritor, referencia_a_lectura, tema_novela_historica);
       }
       else{
-        crear_tipo_lectura(tipo_lectura, titulo, duracion_lectura, ano_publicacion, referencia_autor, referencia_a_lectura);
+        crear_tipo_lectura(tipo_lectura, titulo, duracion_lectura, ano_publicacion, referencia_a_escritor, referencia_a_lectura);
       }
       tema_novela_historica = "";
 
@@ -121,29 +124,29 @@ void Archivos::cargar_grafo(){
 
 }
 
-void Archivo::crear_tipo_lectura(char tipo_lectura, string titulo, int duracion_lectura, int ano publicacion, int referencia_autor, string referencia_a_lectura){
+void Archivos::crear_tipo_lectura(char tipo_lectura, string titulo, string duracion_lectura, string ano_publicacion, int referencia_autor, string referencia_a_lectura){
   if (tipo_lectura == 'C'){
 
-    Cuento* nuevo_cuento = new Cuento(tipo_lectura,titulo,stoi(duracion_lectura),stoi(ano_publicacion),autor_de_lectura,referencia_a_lectura);
+    Cuento* nuevo_cuento = new Cuento(tipo_lectura,titulo,stoi(duracion_lectura),stoi(ano_publicacion),referencia_autor,referencia_a_lectura);
     grafo_completo->agregar_vertice(nuevo_cuento);
   }
   else if(tipo_lectura == 'N'){
 
     Generos genero = de_string_a_enumerado(referencia_a_lectura);
-    Novela * nueva_novela = new Novela(tipo_lectura,titulo,stoi(duracion_lectura),stoi(ano_publicacion),autor_de_lectura,genero);
+    Novela * nueva_novela = new Novela(tipo_lectura,titulo,stoi(duracion_lectura),stoi(ano_publicacion),referencia_autor,genero);
     grafo_completo->agregar_vertice(nueva_novela);
 
   }
   else if(tipo_lectura == 'P'){
     int cantidad_versos = stoi(referencia_a_lectura);
-    Poema * nuevo_poema = new Poema(tipo_lectura,titulo,stoi(duracion_lectura),stoi(ano_publicacion),autor_de_lectura,cantidad_versos);
+    Poema * nuevo_poema = new Poema(tipo_lectura,titulo,stoi(duracion_lectura),stoi(ano_publicacion),referencia_autor,cantidad_versos);
     grafo_completo->agregar_vertice(nuevo_poema);
   }
 }
 
 
-void Archivo::crear_tipo_lectura(char tipo_lectura, string titulo, int duracion_lectura, int ano publicacion, int referencia_autor, string referencia_a_lectura, string tema){
+void Archivos::crear_tipo_lectura(char tipo_lectura, string titulo, string duracion_lectura, string ano_publicacion, int referencia_autor, string referencia_a_lectura, string tema){
   Generos genero = de_string_a_enumerado(referencia_a_lectura);
-  Novela_historica* nueva_novela_historica = new Novela_historica(tipo_lectura,titulo,stoi(duracion_lectura),stoi(ano_publicacion),autor_de_lectura,genero,tema_novela_historica);
+  Novela_historica* nueva_novela_historica = new Novela_historica(tipo_lectura,titulo,stoi(duracion_lectura),stoi(ano_publicacion),referencia_autor,genero,tema);
   grafo_completo->agregar_vertice(nueva_novela_historica);
 }

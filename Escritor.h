@@ -8,7 +8,7 @@ using namespace std;
 class Escritor
 {
 private:
-    string referencia; // (numero)
+    int referencia; // (numero)
     string nombre_y_apellido;
     string nacionalidad;
     string anio_nacimiento;
@@ -17,7 +17,7 @@ private:
 public:
   //PRE:Recibe los parametros a almacenar en el objeto
   //POST: Almacena los datos
-    Escritor(string _referencia, string _nombre_y_apellido,string _nacionalidad,string _anio_nacimiento,string _anio_fallecimiento);
+    Escritor(int _referencia, string _nombre_y_apellido,string _nacionalidad,string _anio_nacimiento,string _anio_fallecimiento);
     //PRE:
     //POST:
     ~Escritor();
@@ -41,7 +41,7 @@ public:
 
     //PRE:
     //POST: Devuelve la referencia almacenada
-    string obtener_referencia();
+    int obtener_referencia();
 };
 
 

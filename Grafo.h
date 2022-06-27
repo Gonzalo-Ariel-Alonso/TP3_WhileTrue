@@ -43,7 +43,7 @@ class Grafo{
 
         int calcular_costo_arista(Lectura * origen, Lectura * adyacente );
 
-        Tipo_de_lecturas de_char_a_enumerado(char char_tipo_lectura);
+        Tipo_de_lectura de_char_a_enumerado(char char_tipo_lectura);
 
         void conectar_nuevo_vertice_con_todos(Dato nuevo_dato);
 
@@ -217,7 +217,7 @@ int Grafo<Dato>::calcular_costo_arista(Lectura * origen, Lectura * adyacente ){
 }
 
 template <typename Dato>
-Tipo_de_lecturas Grafo<Dato>::de_char_a_enumerado(char char_tipo_lectura){
+Tipo_de_lectura Grafo<Dato>::de_char_a_enumerado(char char_tipo_lectura){
 
   Tipo_de_lecturas tipo_de_lectura;
   if(char_tipo_lectura  == 'N')

@@ -1,7 +1,7 @@
 #include "Menu.h"
 
 Menu::Menu(string archivo_escritores, string archivo_lecturas){
-  Archivos manejo_archivos(archivo_escritores, &vector_escritores,grafo_completo, archivo_lecturas);
+  Archivos manejo_archivos(archivo_escritores, vector_escritores,&grafo_completo, archivo_lecturas);
   manejo_archivos.leer_archivo_escritores();
   manejo_archivos.cargar_grafo();
   grafo_completo.transformar_a_grafo_completo();
