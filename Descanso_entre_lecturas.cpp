@@ -3,6 +3,7 @@ Descanso_entre_lecturas::Descanso_entre_lecturas(Tipo_de_lecturas lectura_actual
 {
     this->lectura_actual = lectura_actual;
     this->lectura_siguiente = lectura_siguiente;
+    set_tiempo_de_descanso();
 }
 
 Descanso_entre_lecturas::~Descanso_entre_lecturas()

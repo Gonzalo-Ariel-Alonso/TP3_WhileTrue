@@ -182,16 +182,23 @@ void Grafo<Dato>::agregar_arista(Dato  origen, Dato  adyacente, int costo_arista
   vertice_adyacente = 0;
 }
 
+
+
+
+
+//Solo hay vertices y no hay aristas
 template <typename Dato>
 void Grafo<Dato>::transformar_a_grafo_completo(){
-  Vertice<Dato> * vertice_origen = primer_vertice;
-  Vertice<Dato> * vertice_llegada = primer_vertice;
-  Dato dato_vertice_origen ;
-  Dato dato_vertice_adyacente;
-  for (int i = 1; i <= cantidad_vertices; i++){
-    dato_vertice_origen = vertice_origen->get_dato_vertice();
-    for (int j = 1; j <= cantidad_vertices; i++){
+  Vertice<Dato> * vertice_origen = primer_vertice; // marco el vertice origen
+  Vertice<Dato> * vertice_llegada = primer_vertice; // marco el vertice adyacente
+  Dato dato_vertice_origen ; // dato_origen
+  Dato dato_vertice_adyacente; //dato_adyacente
+  for (int i = 1; i <= cantidad_vertices; i++){ // recorro los vertices
+    dato_vertice_origen = vertice_origen->get_dato_vertice(); //consigo el dato origen
+
+    for (int j = 1; j <= cantidad_vertices; j++){ //recorro los adyacentes
       dato_vertice_adyacente = vertice_llegada->get_dato_vertice();
+
       if ( dato_vertice_origen != dato_vertice_adyacente ){
         int costo = calcular_costo_arista(dato_vertice_origen, dato_vertice_adyacente);
         agregar_arista(dato_vertice_origen, dato_vertice_adyacente, costo );
@@ -311,7 +318,7 @@ void Grafo<Dato>::eliminar_vertice(Dato dato){
 
 template < typename Dato >
 void Grafo<Dato>::imprimir_grafo(){
-  Vertice<Dato> * vertice_origen = primer_vertice;
+  Vertice<Dato> * vertice_origen = primer_vertice; // vertice origen
   Arista<Dato> * arista_entre_vertices = vertice_origen->get_arista_adyacente();
   Dato  dato_vertice_origen ;
   Dato  dato_vertice_adyacente ;
@@ -319,13 +326,17 @@ void Grafo<Dato>::imprimir_grafo(){
   for (int i = 1; i <= cantidad_vertices; i++){
     dato_vertice_origen = vertice_origen->get_dato_vertice();
     cout << endl << endl << "VERTICE ---COSTO---> ADYACENTES" << endl;
-    cout << dato_vertice_origen->get_titulo() ;
+    cout << dato_vertice_origen->get_titulo();
     while (arista_entre_vertices != 0){
       dato_vertice_adyacente = arista_entre_vertices->get_vertice_adyacente()->get_dato_vertice();
-      cout << "-----" << arista_entre_vertices->get_peso() << "----->" << dato_vertice_adyacente->get_titulo();
+      cout << "---" << arista_entre_vertices->get_peso() << "--->" << dato_vertice_adyacente->get_titulo();
       arista_entre_vertices = arista_entre_vertices->get_arista_siguiente();
     }
-    vertice_origen = vertice_origen->get_vertice_siguiente();
+    if( vertice_origen->get_vertice_siguiente() != 0 ){
+      vertice_origen = vertice_origen->get_vertice_siguiente();
+      arista_entre_vertices = vertice_origen->get_arista_adyacente();
+    }
+
   }
 }
 
