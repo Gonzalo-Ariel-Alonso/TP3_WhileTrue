@@ -71,6 +71,8 @@ public:
 
     bool esta_el_dato(Dato d);
 
+    void vaciar_datos();
+
     // Destructor
     ~Lista();
 
@@ -208,6 +210,12 @@ bool Lista<Dato>::esta_el_dato(Dato d){
   return revisar;
 }
 
+template <typename Dato>
+void Lista<Dato>::vaciar_datos(){
+  for (int i = 1; i <= cantidad; i++){
+    cambiar_dato(0,i);
+  }
+}
 
 // obtener_nodo
 template <typename Dato>

@@ -17,6 +17,7 @@ Menu::~Menu(){
 }
 
 void Menu::opciones_interfaz(int opcion){
+
   switch (opcion){
     case 1:
       system("clear");
@@ -41,10 +42,12 @@ void Menu::opciones_interfaz(int opcion){
       }
       break;
     case 3:
+      system("clear");
       cout << "\nARBOL EXPANSION MINIMA\n";
       grafo_completo.arbol_expansion_minima(grafo_completo.get_primer_vertice()->get_dato_vertice());
       break;
     case 4:
+      system("clear");
       cout << "Saludos" << endl;
       break;
 

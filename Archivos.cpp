@@ -16,9 +16,9 @@ Archivos::~Archivos(){
 
 
 string Archivos::sacar_parentesis(string referencia_escritor){
-  int tamanio_string = referencia_escritor.length();
+  long unsigned int tamanio_string = referencia_escritor.length();
   string nueva_referencia;
-  for (int i = 1; i < tamanio_string-1; i++){
+  for (long unsigned int i = 1; i < tamanio_string-1; i++){
     nueva_referencia += referencia_escritor[i];
   }
   return nueva_referencia;

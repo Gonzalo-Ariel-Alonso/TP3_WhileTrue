@@ -19,6 +19,8 @@ class Grafo{
     private:
         Vertice<Dato> * primer_vertice;
         int cantidad_vertices;
+
+
     public:
         /*
         Constructor
@@ -42,12 +44,6 @@ class Grafo{
         Vertice<Dato>* get_primer_vertice();
 
         void transformar_a_grafo_completo();
-
-        int calcular_costo_arista(Lectura * origen, Lectura * adyacente );
-
-        void conectar_nuevo_vertice_con_todos(Dato nuevo_dato);
-
-        void conectar_todos_los_vertices_con_el_nuevo(Dato nuevo_dato);
 
         /*
         Cambia un vertice
@@ -74,15 +70,24 @@ class Grafo{
 
         void eliminar_arista (Dato  origen, Dato  adyacente);
 
-
         void arbol_expansion_minima(Dato vertice_inicio);
-
-        void algoritmo_prim(Lista<Dato> * vertices_agregados, Lista<Dato> * vertices_a_agregar, Lista<Camino<Dato>*> * caminos);
-
 
         void imprimir_grafo();
         //Destructor
         ~Grafo();
+private:
+
+
+        int calcular_costo_arista(Lectura * origen, Lectura * adyacente );
+
+        void conectar_nuevo_vertice_con_todos(Dato nuevo_dato);
+
+        void conectar_todos_los_vertices_con_el_nuevo(Dato nuevo_dato);
+
+        void algoritmo_prim(Lista<Dato> * vertices_agregados, Lista<Dato> * vertices_a_agregar, Lista<Camino<Dato>*> * caminos);
+
+        void cambiar_datos_por_nulo();
+
 };
 
 //Constructor
@@ -363,25 +368,6 @@ void Grafo<Dato>::arbol_expansion_minima(Dato vertice_inicio){
   algoritmo_prim(&vertices_agregados, &vertices_a_agregar, &caminos);
   //una vez terminado el algortimo agrego todos los vertices al arbol
 
-    /*
-      Lista<Dato> vertices_agregados;
-            tiene todos los vertices ya agregados
-
-
-      Lista<Dato> vertices_a_agregar;
-            este guardaba los que le faltaban agregar, que ahora esta vacio porque no falta ninguno
-
-
-      Lista<Camino<Dato> *> caminos;
-            este contiene las aristas que son de tipo Camino<Dato>*  y guarda los caminos que son en cantidad_vertices
-            vertices-1
-
-
-      FUNCIONA BIEN HASTA ACA
-      FALTARIA CARGAR ARBOL Y ARREGLAR EL TEMA DEL BORRADO DE ARBOL
-
-    */
-
   for (int i = 1; i <= cantidad_vertices; i++){
     arbol.agregar_vertice(vertices_agregados.consulta(i));
   }
@@ -396,6 +382,9 @@ void Grafo<Dato>::arbol_expansion_minima(Dato vertice_inicio){
     arbol.agregar_arista(origen,adyacente,costo_arista_agregar);
   }
   arbol.imprimir_grafo();
+
+   vertices_agregados.vaciar_datos(); //se vacia para que no borre los del grafo y del arbol
+   arbol.cambiar_datos_por_nulo(); //se vacia para que no borre los del grafo
 
 }
 
@@ -460,7 +449,21 @@ void Grafo<Dato>::algoritmo_prim(Lista<Dato> * vertices_agregados, Lista<Dato> *
 
 }
 
-
+template <typename Dato>
+void Grafo<Dato>::cambiar_datos_por_nulo(){
+  Arista<Dato> * arista_auxiliar;
+  Vertice<Dato> * vertice_auxiliar;
+  vertice_auxiliar = primer_vertice;
+  for (int i = 1; i <= cantidad_vertices; i++){
+    arista_auxiliar = vertice_auxiliar->get_arista_adyacente();
+     while(arista_auxiliar != 0){
+       arista_auxiliar->get_vertice_adyacente()->set_dato_actual(0);
+       arista_auxiliar = arista_auxiliar->get_arista_siguiente();
+     }
+     vertice_auxiliar->set_dato_actual(0);
+     vertice_auxiliar = vertice_auxiliar->get_vertice_siguiente();
+  }
+}
 
 //Destructor
 template<typename Dato>
