@@ -61,7 +61,7 @@ void Archivos::leer_archivo_escritores(){
 void Archivos::carga_vector_escritores(string referencia_escritor,string nombre, string nacionalidad, string anio_nacimiento, string anio_fallecimiento){
   //crear objeto escritor
   referencia_escritor = sacar_parentesis(referencia_escritor);
-  int pos = funcion_hashing(referencia_escritor);
+  int pos = funcion_hashing(referencia_escritor);//la posicion dentro del vector de hash
   int referencia_escritor_entero = stoi(referencia_escritor);
   Escritor* aux = new Escritor(referencia_escritor_entero,nombre,nacionalidad,anio_nacimiento,anio_fallecimiento);
   vector_escritores[pos].agregar_objeto(aux);
