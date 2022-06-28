@@ -43,6 +43,10 @@ public:
     */
     void baja(int pos);
 
+    void baja(Dato d);
+
+    void baja_sin_borrar_dato(Dato d);
+
     //Pre: Recibe un dato
     //Post: Modifica el dato actual del nodo por el nuevo
     void cambiar_dato(Dato d, int pos);
@@ -64,6 +68,8 @@ public:
 
 
     int obtener_cantidad();
+
+    bool esta_el_dato(Dato d);
 
     // Destructor
     ~Lista();
@@ -156,6 +162,33 @@ void Lista<Dato>::baja(int pos) {
     delete borrar;
 }
 
+template <typename Dato>
+void Lista<Dato>::baja(Dato d){
+  int posicion_dato = 0;
+  for (int i = 1; i <= cantidad ; i ++){
+    if (consulta(i) == d){
+      posicion_dato = i;
+    }
+  }
+  if (posicion_dato != 0){
+    baja(posicion_dato);
+  }
+}
+
+template <typename Dato>
+void Lista<Dato>::baja_sin_borrar_dato(Dato d){
+  int posicion_dato = 0;
+  for (int i = 1; i <= cantidad ; i ++){
+    if (consulta(i) == d){
+      posicion_dato = i;
+    }
+  }
+  if (posicion_dato != 0){
+    cambiar_dato(0, posicion_dato);
+    baja(posicion_dato);
+  }
+}
+
 
 //Cambia el valor actual
 
@@ -164,6 +197,16 @@ void Lista<Dato>::cambiar_dato(Dato d, int pos){
     obtener_nodo(pos)->cambiar_dato(d);
 }
 
+template <typename Dato>
+bool Lista<Dato>::esta_el_dato(Dato d){
+  bool revisar = false;
+  for (int i = 1; i <= cantidad ; i ++){
+    if (consulta(i) == d){
+      revisar = true;
+    }
+  }
+  return revisar;
+}
 
 
 // obtener_nodo

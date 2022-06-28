@@ -17,9 +17,10 @@ Menu::~Menu(){
 }
 
 void Menu::opciones_interfaz(int opcion){
-  switch (opcion){  
+  switch (opcion){
     case 1:
       system("clear");
+      cout << "\nGRAFO COMPLETO\n";
       grafo_completo.imprimir_grafo();
       cout << "\n";
       break;
@@ -40,6 +41,8 @@ void Menu::opciones_interfaz(int opcion){
       }
       break;
     case 3:
+      cout << "\nARBOL EXPANSION MINIMA\n";
+      grafo_completo.arbol_expansion_minima(grafo_completo.get_primer_vertice()->get_dato_vertice());
       break;
     case 4:
       cout << "Saludos" << endl;
@@ -57,7 +60,7 @@ void Menu::mostrar_menu(){
     cout << "Elija una opcion: " << endl;
     cout << "\t1 - Imprimir grafo" << endl;
     cout << "\t2 - Imprimir tabla hash" << endl;
-    cout << "\t3 - Agregar un escritor" << endl;
+    cout << "\t3 - Arbol expansion minima" << endl;
     cout << "\t4 - Salir" << endl;
 }
 

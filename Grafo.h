@@ -8,7 +8,8 @@
 #include "Lectura.h"
 #include "Descanso_entre_lecturas.h"
 #include "Tipo_de_lecturas.h"
-
+#include "Lista.h"
+#include "Camino.h"
 using namespace std;
 
 template <typename Dato>
@@ -37,6 +38,8 @@ class Grafo{
         Post: deja apuntando el vertice al nuevo y lo devuelve
         */
         void agregar_vertice(Dato  vertice_nuevo);
+
+        Vertice<Dato>* get_primer_vertice();
 
         void transformar_a_grafo_completo();
 
@@ -71,6 +74,12 @@ class Grafo{
 
         void eliminar_arista (Dato  origen, Dato  adyacente);
 
+
+        void arbol_expansion_minima(Dato vertice_inicio);
+
+        void algoritmo_prim(Lista<Dato> * vertices_agregados, Lista<Dato> * vertices_a_agregar, Lista<Camino<Dato>*> * caminos);
+
+
         void imprimir_grafo();
         //Destructor
         ~Grafo();
@@ -91,6 +100,11 @@ bool Grafo<Dato>::vacia(){
 template<typename Dato>
 int Grafo<Dato>::get_cantidad_vertices(){
     return cantidad_vertices;
+}
+
+template<typename Dato>
+Vertice<Dato>* Grafo<Dato>::get_primer_vertice(){
+  return primer_vertice;
 }
 
 
@@ -301,7 +315,7 @@ void Grafo<Dato>::imprimir_grafo(){
     Dato  dato_vertice_origen ;
     Dato  dato_vertice_adyacente ;
 
-    cout << "\nGRAFO COMPLETO\n";
+
     cout << "\nLECTURA ---TIEMPO DE DESCANSO(min)--->LECTURAS SIGUIENTES\n\n";
     //cout << "\nVERTICE ---TIEMPO_DE_DESCANSO--->VERTICES ADYACENTES\n\n";
     for (int i = 1; i <= cantidad_vertices; i++){
@@ -321,6 +335,132 @@ void Grafo<Dato>::imprimir_grafo(){
     }
   }
 }
+
+
+//ALGORIMO PRIM
+template<typename Dato>
+void Grafo<Dato>::arbol_expansion_minima(Dato vertice_inicio){
+  Grafo<Dato> arbol; //arbol expansion minima estatico
+  Lista<Dato> vertices_agregados; //guarda los vertices YA agregados
+  vertices_agregados.alta(vertice_inicio); //agrego ya su primer vertice inicio
+  Lista<Dato> vertices_a_agregar; // aca van todos los vertices NO agregados
+  Vertice<Dato> * actual ;
+  actual = consulta_vertice(vertices_agregados.consulta(1));
+  //recorro los vertices
+  for (int i = 1; i <= cantidad_vertices; i++){
+    //lo agego a vertices_a_agregar si es que e vertice no esta agregado en vertices_agregados
+    if ( !vertices_agregados.esta_el_dato(actual->get_dato_vertice()) ){
+      vertices_a_agregar.alta(actual->get_dato_vertice());//alta
+    }
+    actual = actual->get_vertice_siguiente(); //Actual pasa a ser el siguiente
+  }
+//carga bien la primer lista de vertices a agregar
+//carga bien la primer lista de vertices agregados
+  Lista<Camino<Dato> *> caminos; // es una lista con un objeto CAMINO que guarda objeto origen y adyacente con el peso de arista
+
+  //El algoritmo de prim me llena la lista de vertices_agregados, me vacia vertices_a_agregar y me llena
+  //con los caminos minimio la lista caminos
+  algoritmo_prim(&vertices_agregados, &vertices_a_agregar, &caminos);
+  //una vez terminado el algortimo agrego todos los vertices al arbol
+
+    /*
+      Lista<Dato> vertices_agregados;
+            tiene todos los vertices ya agregados
+
+
+      Lista<Dato> vertices_a_agregar;
+            este guardaba los que le faltaban agregar, que ahora esta vacio porque no falta ninguno
+
+
+      Lista<Camino<Dato> *> caminos;
+            este contiene las aristas que son de tipo Camino<Dato>*  y guarda los caminos que son en cantidad_vertices
+            vertices-1
+
+
+      FUNCIONA BIEN HASTA ACA
+      FALTARIA CARGAR ARBOL Y ARREGLAR EL TEMA DEL BORRADO DE ARBOL
+
+    */
+
+  for (int i = 1; i <= cantidad_vertices; i++){
+    arbol.agregar_vertice(vertices_agregados.consulta(i));
+  }
+  //como hay N vertices, y N-1 aristas la condicion de corte tiene que ser 1
+  //antes que cantidad_vertices
+  Camino<Dato> * camino_minimo;
+  for (int i = 1 ; i < cantidad_vertices; i++){
+    camino_minimo = caminos.consulta(i);
+    Dato origen = camino_minimo->get_origen();
+    Dato adyacente = camino_minimo->get_adyacente();
+    int costo_arista_agregar = camino_minimo->get_costo();
+    arbol.agregar_arista(origen,adyacente,costo_arista_agregar);
+  }
+  arbol.imprimir_grafo();
+
+}
+
+template <typename Dato>
+void Grafo<Dato>::algoritmo_prim(Lista<Dato> * vertices_agregados, Lista<Dato> * vertices_a_agregar, Lista<Camino<Dato>*> * caminos){
+  Vertice<Dato> * vertice_actual;
+  Arista<Dato> * arista_auxiliar;
+  Camino<Dato> * camino_minimo;
+
+ /*
+ LAS LISTAS LLEGAN BIEN CARGADAS!!
+ */
+  int costo_arista;
+  int cantidad_vertices_agregados;
+  //me guardo el dato de donde sale el vertice
+  Dato minima_salida;
+  //me gusardo el dato del vertice_adyacente;
+  Dato minima_llegada;
+
+  //recorro un for hasta que agrego todos los vertices
+  // i < cantidad_vertices, porque el primero ya esta agregado entonces faltan N-1 vertices
+
+  for (int i = 1; i < cantidad_vertices; i++){
+
+    minima_salida = 0;
+    minima_llegada = 0;
+    //me guardo el costo de la arista, inicializa alto para saber que cualquier arista es mas chica
+    costo_arista = 99999;
+
+    //me da la cantidad de vertices ya agregados
+    cantidad_vertices_agregados = vertices_agregados->obtener_cantidad();
+    // recorro de los vertices ya agregados y busco la arista de menor costo;
+    for (int j = 1; j <= cantidad_vertices_agregados; j++){
+
+      //vertice_actual toma el valor de los vertices en la lista de agregados
+      vertice_actual = consulta_vertice(vertices_agregados->consulta(j));
+      //arista_auxiliar toma el valor de la primer adyacente a vertice_actual
+      arista_auxiliar = vertice_actual->get_arista_adyacente();
+      //recorro todas las adyacente buscando la arista minima
+
+      while (arista_auxiliar != 0 ){
+
+        // compara si es que la arista de llegada es una que pertenece a aristas a agregar
+        if (vertices_a_agregar->esta_el_dato(arista_auxiliar->get_dato_vertice_adyacente())){
+          int peso_arista = arista_auxiliar->get_peso();
+          //entre a la arista, y comparo si es mas chica a la ya hallada(inicializada en 99999)
+          //si es igual lo ignoro y me quedo con la que tenia
+          if (peso_arista < costo_arista){
+            costo_arista = peso_arista;
+            minima_salida = vertice_actual->get_dato_vertice();
+            minima_llegada = arista_auxiliar->get_dato_vertice_adyacente();
+          }
+        }
+        arista_auxiliar = arista_auxiliar->get_arista_siguiente();
+      }
+    }
+    camino_minimo = new Camino<Dato>(minima_salida, minima_llegada, costo_arista);
+    caminos->alta(camino_minimo);
+    vertices_agregados->alta(minima_llegada);
+    vertices_a_agregar->baja_sin_borrar_dato(minima_llegada);
+  }
+
+}
+
+
 
 //Destructor
 template<typename Dato>
