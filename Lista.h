@@ -1,7 +1,7 @@
 #ifndef LISTA_LISTA_H
 #define LISTA_LISTA_H
 
-
+// includes de otros TDA
 #include "Nodo.h"
 
 template <typename Dato>

@@ -1,13 +1,16 @@
 #ifndef ESCRITORES_H
 #define ESCRITORES_H
+
+// includes
 #include <iostream>
-//#include <string>
+
 
 using namespace std;
 
 class Escritor
 {
 private:
+    //atributos
     int referencia; // (numero)
     string nombre_y_apellido;
     string nacionalidad;

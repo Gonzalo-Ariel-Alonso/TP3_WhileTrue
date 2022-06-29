@@ -1,25 +1,51 @@
 #ifndef CAMINO_H
 #define CAMINO_H
 
-
+// includes
 #include <iostream>
 
 using namespace std;
 template <typename Dato>
 
 class Camino {
-private:
-  Dato origen;
-  Dato adyacente;
-  int costo;
+  private:
+    Dato origen;
+    Dato adyacente;
+    int costo;
 
-public:
-  Camino(Dato Origen, Dato adyacente, int costo_arista);
-  Dato get_origen();
-  Dato get_adyacente();
-  int get_costo();
-  void imprimir_camino();
-  ~Camino();
+  public:
+    /*
+    Constructor
+    Pre: El dato del vertice origen, el dato del vertice adyacente, el costo de la arista
+    Pos: Devuelve un objeto tipo Dato con los parametros pasados
+    */
+    Camino(Dato Origen, Dato adyacente, int costo_arista);
+    /*
+    Devuelve el dato origen(atributo)
+    Pre: -
+    Pos: El Dato origen(atributo)
+    */
+    Dato get_origen();
+    /*
+    Devuelve el dato adyacente(atributo) 
+    Pre: -
+    Pos: El Dato adyacente(atributo)
+    */
+    Dato get_adyacente();
+    /*
+    Devuelve un entero, el costo del camino(atributo)
+    Pre: -
+    Pos: Un entero
+    */
+    int get_costo();
+    /*
+    Imprime el camino
+    Pre: -
+    Pos: -
+    */
+    void imprimir_camino();
+    // Destructor
+    ~Camino();
 };
 
 template <typename Dato>

@@ -1,9 +1,11 @@
 #ifndef LECTURAS_NOVELA_HISTORICA_H
 #define LECTURAS_NOVELA_HISTORICA_H
 
+// includes
 #include <iostream>
 #include <string>
-using namespace std;
+
+// includes de otros TDA
 #include "Novela.h"
 
 class Novela_historica: public Novela {

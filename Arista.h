@@ -1,10 +1,11 @@
 #ifndef ARISTA_H
 #define ARISTA_H
 
+// includes
 #include <iostream>
 
+// includes de otros TDA
 #include "Vertice.h"
-
 
 using namespace std;
 
@@ -12,24 +13,74 @@ template <typename Dato>
 class Vertice;
 
 template <typename Dato>
-class Arista
-{
-private:
-    Arista<Dato> * arista_adyacente;
-    Vertice<Dato> * vertice_adyacente;
-    int peso;
+class Arista{
+    private:
+        //atributos
+        Arista<Dato> * arista_adyacente;
+        Vertice<Dato> * vertice_adyacente;
+        int peso;
 
-public:
-    Arista();
-    Arista(Vertice<Dato> * vertice_adyacente);
-    ~Arista();
-    void set_arista_siguiente(Arista<Dato> * arista_nueva);
-    Arista<Dato>* get_arista_siguiente();
-    void set_vertice_adyacente(Vertice<Dato> * vertice_adyacente);
-    Vertice<Dato> * get_vertice_adyacente();
-    Dato get_dato_vertice_adyacente();
-    int get_peso();
-    void set_peso(int peso);
+    public:
+        /*
+        Constructor
+        Pre: -
+        Pos: Inicializa una arista con el vertice adyacente y el arista adayacente apuntando a 0
+        */
+        Arista();
+        /*
+        Constructor
+        Pre: La posicion de un vertice
+        Pos: Inicializa una arista con el vertice pasado por parametro  
+        */
+        Arista(Vertice<Dato> * vertice_adyacente);
+        /*
+        Destructor
+        Pre: -
+        Pos: -
+        */
+        ~Arista();
+        /*
+        Cambia el arista adyacente(atributo) por el que se paso por parametro
+        Pre: El puntero de una arista
+        Pos: -
+        */
+        void set_arista_siguiente(Arista<Dato> * arista_nueva);
+        /*
+        Devuelve el arista siguiente(atributo)
+        Pre: -
+        Pos: Devuelve el (atributo) arista adyacente
+        */
+        Arista<Dato>* get_arista_siguiente();
+        /*
+        Cambia el vertice adyacente(atributo) por el que se paso por parametro
+        Pre: El puntero de un vertice
+        Pos: -
+        */
+        void set_vertice_adyacente(Vertice<Dato> * vertice_adyacente);
+        /*
+        Devuelve el arista siguiente(atributo)
+        Pre: -
+        Pos: Devuelve el (atributo) vertice adyacente
+        */
+        Vertice<Dato> * get_vertice_adyacente();
+        /*
+        Devuelve el dato del vertice
+        Pre: -
+        Pos: Devuelve el dato del vertice(atributo)
+        */
+        Dato get_dato_vertice_adyacente();
+        /*
+        Devuelve el (atributo) peso, que es el peso de la arista
+        Pre: -
+        Pos: Devuelve un entero
+        */
+        int get_peso();
+        /*
+        Cambia el peso de la arista por el pasado por parametro
+        Pre: Un entero
+        Pos: -
+        */
+        void set_peso(int peso);
 };
 
 template <typename Dato>

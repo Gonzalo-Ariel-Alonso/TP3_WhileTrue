@@ -1,10 +1,11 @@
 #ifndef LECTURAS_NOVELA_H
 #define LECTURAS_NOVELA_H
 
-
+// includes
 #include <iostream>
 #include <string>
-using namespace std;
+
+// includes de otros TDA
 #include "Lectura.h"
 #include "Escritor.h"
 #include "Genero.h"

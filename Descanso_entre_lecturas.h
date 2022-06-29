@@ -1,6 +1,7 @@
 #ifndef DESCANSO_ENTRE_LECTURAS_H
 #define DESCANSO_ENTRE_LECTURAS_H
 
+// includes de otros TDA
 #include "Tipo_de_lecturas.h"
 
 class Descanso_entre_lecturas

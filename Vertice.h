@@ -1,12 +1,11 @@
 #ifndef VERTICE_H
 #define VERTICE_H
 
+// includes
 #include<iostream>
+
+// includes de otros TDA
 #include "Arista.h"
-
-using namespace std;
-
-
 
 template <typename Dato>
 class Arista;

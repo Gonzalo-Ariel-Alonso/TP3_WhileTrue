@@ -1,8 +1,10 @@
 #ifndef GRAFO_H
 #define GRAFO_H
 
+// includes
 #include <iostream>
 
+// includes de otros TDA
 #include "Vertice.h"
 #include "Arista.h"
 #include "Lectura.h"

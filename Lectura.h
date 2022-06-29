@@ -1,9 +1,11 @@
-
 #ifndef LECTURAS_LECTURA_H
 #define LECTURAS_LECTURA_H
 
+// includes
 #include <iostream>
 #include <string>
+
+// includes de otros TDA
 #include "Escritor.h"
 #include "Genero.h"
 #include "Tipo_de_lecturas.h"
