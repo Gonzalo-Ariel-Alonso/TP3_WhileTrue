@@ -23,20 +23,25 @@ void Menu::opciones_interfaz(int opcion){
       system("clear");
       cout << "\nGRAFO COMPLETO\n";
       grafo_completo.imprimir_grafo();
+      presione_para_salir();
       cout << "\n";
       break;
     case 2:
       system("clear");
       imprimir_escritores();
+      presione_para_salir();
       break;
     case 3:
       system("clear");
       cout << "\nARBOL EXPANSION MINIMA\n";
       grafo_completo.arbol_expansion_minima(grafo_completo.get_primer_vertice()->get_dato_vertice());
+      presione_para_salir();
       break;
     case 4:
+      system("clear");
       cout << "Saco primer vertice" << endl;
       grafo_completo.eliminar_vertice(grafo_completo.get_primer_vertice()->get_dato_vertice());
+      presione_para_salir();
       break;
     case 5:
       system("clear");
@@ -88,3 +93,11 @@ void Menu::imprimir_escritores(){
       }
     }
   }
+
+void Menu::presione_para_salir(){
+  int entrada;
+  cout << "\n ----- Preiona enter para continuar -----" << endl;
+  cin.ignore();
+  cin.get();
+  system("clear");
+}

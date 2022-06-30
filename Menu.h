@@ -19,7 +19,7 @@ using namespace std;
 
 class Menu {
 private:
-
+  //atributos
   Vector * vector_escritores;
   Grafo<Lectura *> grafo_completo;
 
@@ -31,7 +31,7 @@ public:
   //POST: carga las listas con la informacion de cada archivo
   Menu(string archivo_escritor_a_escritores, string archivo_lecturas);
 
-  //PRE:
+  //PRE: ---
   //POST: Libera la memoria de lo almacenado
   ~Menu();
 
@@ -42,7 +42,7 @@ public:
 
 private:
 
-  //PRE:
+  //PRE: ---
   //POST: Imprime por pantalla el menu
   void mostrar_menu();
 
@@ -53,11 +53,13 @@ private:
   //PRE: El usuario inserta un valor
   //POST: Devuelve lo ingresado por el usuario
   int ingresar_opciones_interfaz();
-  
+
   //PRE: ---
   ///POST: ---
   void imprimir_escritores();
-
+  //PRE: ---
+  //POST: ---
+  void presione_para_salir();
 };
 
 
