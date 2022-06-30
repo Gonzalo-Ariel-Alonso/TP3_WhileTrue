@@ -74,7 +74,9 @@ class Archivos {
     */
     int funcion_hashing ( string referencia_escritor );
     /*
-    MODULARIZAR
+    Carga el grafo con las lecturas dentro de lecturas.txt
+    Pre: -
+    Pos: -
     */
     void cargar_grafo();
     /*
