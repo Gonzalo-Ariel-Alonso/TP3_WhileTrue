@@ -95,7 +95,6 @@ void Menu::imprimir_escritores(){
   }
 
 void Menu::presione_para_salir(){
-  int entrada;
   cout << "\n ----- Preiona enter para continuar -----" << endl;
   cin.ignore();
   cin.get();
