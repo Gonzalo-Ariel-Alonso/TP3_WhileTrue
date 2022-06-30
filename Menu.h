@@ -53,6 +53,10 @@ private:
   //PRE: El usuario inserta un valor
   //POST: Devuelve lo ingresado por el usuario
   int ingresar_opciones_interfaz();
+  
+  //PRE: ---
+  ///POST: ---
+  void imprimir_escritores();
 
 };
 

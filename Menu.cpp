@@ -26,20 +26,8 @@ void Menu::opciones_interfaz(int opcion){
       cout << "\n";
       break;
     case 2:
-
-    /*
-      HAY QUE ARMARLE UNA FUNCION ASI NO SE HACE EN EL SWITCH
-      SOLO LA USE ACA PARA PROBAR QUE FUNCIONE BIEN
-      */
       system("clear");
-      cout << "TABLA HASH" << endl;
-      for(int i = 0; i < TAMANIO_VECTOR; i++){
-        if (vector_escritores[i].get_cantidad_anidados() != 0){
-          cout << endl << " --------------------" << endl;
-          cout << "POSICION " << i << " DEL VECTOR:" << endl;
-          vector_escritores[i].imprimir_lista();
-        }
-      }
+      imprimir_escritores();
       break;
     case 3:
       system("clear");
@@ -82,5 +70,15 @@ void Menu::interfaz_usuario_con_ingreso(){
     selector = ingresar_opciones_interfaz();
     opciones_interfaz(selector);
   }
-
 }
+
+void Menu::imprimir_escritores(){
+    cout << "TABLA HASH" << endl;
+    for(int i = 0; i < TAMANIO_VECTOR; i++){
+      if (vector_escritores[i].get_cantidad_anidados() != 0){
+        cout << endl << " --------------------" << endl;
+        cout << "POSICION " << i << " DEL VECTOR:" << endl;
+        vector_escritores[i].imprimir_lista();
+      }
+    }
+  }
