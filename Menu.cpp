@@ -22,9 +22,13 @@ void Menu::opciones_interfaz(int opcion){
     case 1:
       system("clear");
       cout << "\nGRAFO COMPLETO\n";
+      if(!grafo_completo.vacia()){
       grafo_completo.imprimir_grafo();
       presione_para_salir();
       cout << "\n";
+      }
+      else
+        cout << "\t\t\t\t\t\t -------Grafo Vacio-------" << endl;
       break;
     case 2:
       system("clear");
@@ -34,14 +38,22 @@ void Menu::opciones_interfaz(int opcion){
     case 3:
       system("clear");
       cout << "\nARBOL EXPANSION MINIMA\n";
+      if(!grafo_completo.vacia()){
       grafo_completo.arbol_expansion_minima(grafo_completo.get_primer_vertice()->get_dato_vertice());
       presione_para_salir();
+      }
+      else
+        cout << "\t\t\t\t\t\t -------Grafo Vacio-------" << endl;
       break;
     case 4:
       system("clear");
+      if(!grafo_completo.vacia()){
       cout << "Saco primer vertice" << "( " + grafo_completo.get_primer_vertice()->get_dato_vertice()->get_titulo() + " )" << endl;
       grafo_completo.eliminar_vertice(grafo_completo.get_primer_vertice()->get_dato_vertice());
       presione_para_salir();
+      }
+      else
+        cout << "\t\t\t\t\t\t -------Grafo Vacio, no se pueden sacar mas vertices-------" << endl;
       break;
     case 5:
       system("clear");
