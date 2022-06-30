@@ -38,8 +38,10 @@ void Menu::opciones_interfaz(int opcion){
       presione_para_salir();
       break;
     case 4:
+      system("clear");
       cout << "Saco primer vertice" << endl;
       grafo_completo.eliminar_vertice(grafo_completo.get_primer_vertice()->get_dato_vertice());
+      presione_para_salir();
       break;
     case 5:
       system("clear");
