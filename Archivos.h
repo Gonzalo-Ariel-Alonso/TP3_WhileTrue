@@ -39,7 +39,7 @@ class Archivos {
   public:
     /*
     Constructor con grafo 
-    Pre: archivo escritores, vector escritores, grafo , archivo lecturas txt 
+    Pre: archivo escritores, vector escritores,puntero grafo , archivo lecturas txt 
     Pos: inicializa un archivo 
     */
     Archivos( string escritores_txt ,Vector * vector_escritores, Grafo<Lectura*> * grafo, string lecturas_txt);

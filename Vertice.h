@@ -11,24 +11,76 @@ template <typename Dato>
 class Arista;
 
 template <typename Dato>
-class Vertice{
-private:
-  Vertice<Dato> * vertice_siguiente;
-  Dato dato_actual;
-  Arista<Dato> * arista_adyacente;
+  class Vertice{
+  private:
+    //atributos
+    Vertice<Dato> * vertice_siguiente;
+    Dato dato_actual;
+    Arista<Dato> * arista_adyacente;
 
-public:
-  Vertice();
-  Vertice(Dato dato);
-  ~Vertice();
-  Vertice<Dato>* get_vertice_siguiente();
-  void set_vertice_siguiente (Vertice<Dato> * nuevo_vertice);
-  void set_arista_adyacente (Arista<Dato> * arista_adyacente);
-  void set_nueva_arista_adyacente (Arista<Dato> * nueva_arista_adyacente);
-  Arista<Dato>* get_arista_adyacente();
-  void eliminar_arista(Dato dato);
-  Dato get_dato_vertice();
-  void set_dato_actual(Dato nuevo_dato);
+  public:
+    /*
+    Constructor
+    Pre: - 
+    Pos: Inicializa un vertice con los parametros en 0
+    */
+    Vertice();
+    /*
+    Constructor
+    Pre: Un "Dato"
+    Pos: Inicializa un vertice con el dato pasado por parametro
+    */
+    Vertice(Dato dato);
+    //Destructor
+    ~Vertice();
+    /*
+    Devuelve el vertice siguiente
+    Pre: -
+    Pos: Devuelde el puntero hacia el vertice siguiente(atributo)
+    */
+    Vertice<Dato>* get_vertice_siguiente();
+    /*
+    Cambia el dato del vertice siguiente
+    Pre: El puntero del nuevo vertice
+    Pos: -
+    */
+    void set_vertice_siguiente (Vertice<Dato> * nuevo_vertice);
+    /*
+    Asigna el vertice siguiente pasado por parametro
+    Pre: El puntero de un vertice
+    Pos: -
+    */
+    void set_arista_adyacente (Arista<Dato> * arista_adyacente);
+    /*
+    Asigna una nueva arista pasada por parametro
+    Pre: El puntero de una arista
+    Pos: -
+    */
+    void set_nueva_arista_adyacente (Arista<Dato> * nueva_arista_adyacente);
+    /*
+    Devuelve la arista siguiente(atributo)
+    Pre: -
+    Pos: Devuelve el arista adyancente(atributo)
+    */
+    Arista<Dato>* get_arista_adyacente();
+    /*
+    Busca la arista y la elimina(deja apuntando el anterior al siguiente)
+    Pre: El dato(peso) de la arista a eliminar
+    Pos: - 
+    */
+    void eliminar_arista(Dato dato);
+    /*
+    Devuelve el dato del vertice
+    Pre: -
+    Pos: Devuelve el dato(atributo) del vertice
+    */
+    Dato get_dato_vertice();
+    /*
+    Cambia el dato(atributo) del vertice
+    Pre: Un Dato
+    Pos:, -
+    */
+    void set_dato_actual(Dato nuevo_dato);
 };
 
 
@@ -90,7 +142,7 @@ void Vertice<Dato>::set_nueva_arista_adyacente (Arista<Dato> * nueva_arista_adya
     arista_adyacente = nueva_arista_adyacente;
   }
   else{
-    while ( arista_auxiliar->get_arista_siguiente() != 0 ){
+    while ( arista_auxiliar->get_arista_siguiente() != 0 ){// termina cuando encuentra la ultima arista
       arista_auxiliar = arista_auxiliar->get_arista_siguiente();
     }
     arista_auxiliar->set_arista_siguiente(nueva_arista_adyacente);
