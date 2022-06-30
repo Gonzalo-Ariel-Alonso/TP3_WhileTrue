@@ -12,6 +12,7 @@
 #include "Tipo_de_lecturas.h"
 #include "Lista.h"
 #include "Camino.h"
+
 using namespace std;
 
 template <typename Dato>
@@ -30,21 +31,55 @@ class Grafo{
         Post: Inicializa en 0 cantidad_vertices y deja apuntando a null primer_vertice
         */
         Grafo();
+
         /*
         Vacia
         Pre: -
         Post: devuelve si la lista esta vacia
         */
         bool vacia();
+
+        /*
+        Consulta la cantidad de vertice
+        Pre: -
+        Post: Devuelve la cantidad de vertices
+        */
+        int get_cantidad_vertices();
+
+        /*
+        Pre:-
+        Post: Devuelve el primer vertice
+        */
+        Vertice<Dato>* get_primer_vertice();
+
+
         /*
         Agrega un vertice
-        Pre: el vertice a agregar
-        Post: deja apuntando el vertice al nuevo y lo devuelve
+        Pre: Recibe la direccion del un Dato
+        Post: Lo agrega al final
         */
         void agregar_vertice(Dato  vertice_nuevo);
 
-        Vertice<Dato>* get_primer_vertice();
+        /*
+        Devuelve el vertice
+        Pre: Recibe un objeto de tipo Dato
+        Post: Devuelve el vertice
+        */
+        Vertice<Dato>* consulta_vertice( Dato dato );
 
+        /*
+        Agrega una arista al Grafo
+        Pre:  Recibe el Dato del vertice origen ,del adyacente y el costo de la arista
+        Post: Agrega el camino entre vertices con el respectivo costo
+        */
+        void agregar_arista(Dato  origen, Dato  adyacente, int costo_arista);
+
+
+        /*
+        Vuelve al grafo en completo
+        Pre: Grafo creado con vertices
+        Post: Conecta todos los vertices con todos
+        */
         void transformar_a_grafo_completo();
 
         /*
@@ -53,41 +88,79 @@ class Grafo{
         Post: cambia el dato del vertice por el vertice_nuevo
         */
         void set_vertice(Vertice<Dato>* vertice_nuevo);
-        /*
-        Devuelve el vertice
-        Pre: -
-        Post: Devuelve el vertice
-        */
-        Vertice<Dato>* consulta_vertice( Dato dato );
-        /*
-        Consulta la cantidad de vertice
-        Pre: -
-        Post: Devuelve la cantidad de vertices
-        */
-        int get_cantidad_vertices();
 
-        void agregar_arista(Dato  origen, Dato  adyacente, int costo_arista);
-
+        /*
+        Pre: Recibe un Dato
+        Post: Lo quita del grafo junto con las aristas que lo involucran
+        */
         void eliminar_vertice(Dato dato);
 
+        /*
+        Pre: Recibe el Dato origen y adyacente
+        Post : borra la arista que los conecta en la respectiva direccion
+        */
         void eliminar_arista (Dato  origen, Dato  adyacente);
 
+        /*
+        Pre: Recibe el vertice donde arrancar el algoritmo de prim
+        Post: Imprime el arbol de expansion minima
+        */
         void arbol_expansion_minima(Dato vertice_inicio);
 
+        /*
+        Pre:-
+        Post: Imprime el grafo, como lista de adyacencia
+        */
         void imprimir_grafo();
+
+
         //Destructor
         ~Grafo();
 private:
-
-
+        /*
+        Pre: Recibe un dato
+        Post: Borra las aristas que lo contengan
+        */
+        void borrar_aristas( Dato dato );
+        /*
+        Pre: Recibe 2 lecturas ya que usa sus metodos,
+        Post: Calcula el tiempo de descanso para la arista
+        */
         int calcular_costo_arista(Lectura * origen, Lectura * adyacente );
 
+        /*
+        Pre: Recibe un Dato
+        Post: Conecta el Dato con el resto de vertices
+        */
         void conectar_nuevo_vertice_con_todos(Dato nuevo_dato);
-
+        /*
+        Pre: Recibe un Dato
+        Post: Conecta todos los vertices con el vertice que contiene al Dato
+        */
         void conectar_todos_los_vertices_con_el_nuevo(Dato nuevo_dato);
 
-        void algoritmo_prim(Lista<Dato> * vertices_agregados, Lista<Dato> * vertices_a_agregar, Lista<Camino<Dato>*> * caminos);
+        /*
+        Pre: Recibe las respectivas listas a cargar
+        Post: Las carga de manera que se pueda inicializar prim
+        */
+        void inicializar_listas_para_prim (Lista<Dato> * vertices_agregados, Lista<Dato> * vertices_a_agregar, Dato vertice_inicio);
 
+        /*
+        Pre: Recibe las listas cargadas ya por el algoritmo de prim
+        Post: Carga el arbol con la informacion de las listas
+        */
+        int crear_arbol(Grafo<Dato> * arbol ,Lista<Dato> * vertices_agregados, Lista<Camino<Dato> *> * caminos);
+        /*
+        Pre: Recibe 3 listas cargadas con sus respectivos datos
+        Post: Devuelve una lista con los vertices, otra vacia y una que guardo los caminos y costos
+        */
+        void algoritmo_prim(Lista<Dato> * vertices_agregados, Lista<Dato> * vertices_a_agrega, Lista<Camino<Dato>*> * caminos);
+
+        /*
+        NO TIENE USO MAS QUE PARA PODER BORRAR UN GRAFO SIN BORRAR LOS OBJETOS
+        QUE ESTAN GUARDADOS EN EL GRAFO ORIGINAL
+        SE USA ANTES DE DESTRUIR EL ARBOL DE EXPANSION MINIMA
+        */
         void cambiar_datos_por_nulo();
 
 };
@@ -98,11 +171,15 @@ Grafo<Dato>::Grafo(){
     primer_vertice = 0;
     cantidad_vertices = 0;
 }
+
+
 //Vacia
 template<typename Dato>
 bool Grafo<Dato>::vacia(){
     return (cantidad_vertices == 0);
 }
+
+
 //Obtener cantidad vertice
 template<typename Dato>
 int Grafo<Dato>::get_cantidad_vertices(){
@@ -112,6 +189,25 @@ int Grafo<Dato>::get_cantidad_vertices(){
 template<typename Dato>
 Vertice<Dato>* Grafo<Dato>::get_primer_vertice(){
   return primer_vertice;
+}
+
+
+template<typename Dato>
+void Grafo<Dato>::agregar_vertice( Dato  nuevo_dato ){
+  if (cantidad_vertices == 0){
+    primer_vertice = new Vertice<Dato>(nuevo_dato);
+    cantidad_vertices ++;
+  }
+  else{
+    Vertice<Dato> * vertice_actual = primer_vertice;
+
+    for (int i = 1; i < cantidad_vertices; i++ ){
+      vertice_actual = vertice_actual->get_vertice_siguiente();
+    }
+    Vertice<Dato> * nuevo_vertice = new Vertice<Dato>(nuevo_dato);
+    vertice_actual->set_vertice_siguiente(nuevo_vertice);
+    cantidad_vertices ++;
+  }
 }
 
 
@@ -137,24 +233,7 @@ Vertice<Dato>* Grafo<Dato>::consulta_vertice( Dato  dato ){
   return vertice_auxiliar; //devuelve vacio si no esta
 }
 
-//Cambiar Vertice
-template<typename Dato>
-void Grafo<Dato>::agregar_vertice( Dato  nuevo_dato ){
-  if (cantidad_vertices == 0){
-    primer_vertice = new Vertice<Dato>(nuevo_dato);
-    cantidad_vertices ++;
-  }
-  else{
-    Vertice<Dato> * vertice_actual = primer_vertice;
 
-    for (int i = 1; i < cantidad_vertices; i++ ){
-      vertice_actual = vertice_actual->get_vertice_siguiente();
-    }
-    Vertice<Dato> * nuevo_vertice = new Vertice<Dato>(nuevo_dato);
-    vertice_actual->set_vertice_siguiente(nuevo_vertice);
-    cantidad_vertices ++;
-  }
-}
 
 template <typename Dato>
 void Grafo<Dato>::conectar_nuevo_vertice_con_todos(Dato nuevo_dato){
@@ -275,18 +354,22 @@ void Grafo<Dato>::eliminar_arista (Dato  origen, Dato  adyacente){
 }
 
 template <typename Dato>
-void Grafo<Dato>::eliminar_vertice(Dato dato){
+void Grafo<Dato>::borrar_aristas( Dato dato ){
   Vertice<Dato> * actual = primer_vertice;
-
   //recorre por cada vertice sus adyacencias con el vertice a borrar
   for (int i = 1; i <= cantidad_vertices; i++){ //ver la condicion que no se pase
     //eliminar_arista(actual->get_dato_vertice(),dato);
     actual->eliminar_arista(dato);
     actual = actual->get_vertice_siguiente(); // proximo vertice
   }
+}
 
+
+template <typename Dato>
+void Grafo<Dato>::eliminar_vertice(Dato dato){
+  Vertice<Dato> * actual = primer_vertice;
+  borrar_aristas(dato);
   Vertice<Dato> * anterior;
-  actual = primer_vertice;
   //si el primer vertice es el que quiero borrar
   if (primer_vertice->get_dato_vertice() == dato ){
     primer_vertice = primer_vertice->get_vertice_siguiente();
@@ -349,45 +432,60 @@ template<typename Dato>
 void Grafo<Dato>::arbol_expansion_minima(Dato vertice_inicio){
   Grafo<Dato> arbol; //arbol expansion minima estatico
   Lista<Dato> vertices_agregados; //guarda los vertices YA agregados
-  vertices_agregados.alta(vertice_inicio); //agrego ya su primer vertice inicio
+
   Lista<Dato> vertices_a_agregar; // aca van todos los vertices NO agregados
-  Vertice<Dato> * actual ;
-  actual = consulta_vertice(vertices_agregados.consulta(1));
-  //recorro los vertices
-  for (int i = 1; i <= cantidad_vertices; i++){
-    //lo agego a vertices_a_agregar si es que e vertice no esta agregado en vertices_agregados
-    if ( !vertices_agregados.esta_el_dato(actual->get_dato_vertice()) ){
-      vertices_a_agregar.alta(actual->get_dato_vertice());//alta
-    }
-    actual = actual->get_vertice_siguiente(); //Actual pasa a ser el siguiente
-  }
-//carga bien la primer lista de vertices a agregar
-//carga bien la primer lista de vertices agregados
+
   Lista<Camino<Dato> *> caminos; // es una lista con un objeto CAMINO que guarda objeto origen y adyacente con el peso de arista
+
+  inicializar_listas_para_prim(&vertices_agregados, &vertices_a_agregar, vertice_inicio);
+
 
   //El algoritmo de prim me llena la lista de vertices_agregados, me vacia vertices_a_agregar y me llena
   //con los caminos minimio la lista caminos
   algoritmo_prim(&vertices_agregados, &vertices_a_agregar, &caminos);
   //una vez terminado el algortimo agrego todos los vertices al arbol
 
+  int costo_arbol_expansion_minima = crear_arbol(&arbol, &vertices_agregados, &caminos);
+  arbol.imprimir_grafo();
+
+  vertices_agregados.vaciar_datos(); //se vacia para que no borre los del grafo y del arbol
+  arbol.cambiar_datos_por_nulo(); //se vacia para que no borre los del grafo
+  cout << endl << endl << "Costo Arbol Expansion Minima: " << costo_arbol_expansion_minima << endl;
+}
+
+
+template < typename Dato>
+void Grafo<Dato>::inicializar_listas_para_prim (Lista<Dato> * vertices_agregados, Lista<Dato> * vertices_a_agregar, Dato vertice_inicio){
+  vertices_agregados->alta(vertice_inicio); //agrego ya su primer vertice inicio
+  Vertice<Dato> * actual = primer_vertice ;
+  //recorro los vertices
   for (int i = 1; i <= cantidad_vertices; i++){
-    arbol.agregar_vertice(vertices_agregados.consulta(i));
+    //lo agego a vertices_a_agregar si es que e vertice no esta agregado en vertices_agregados
+    if ( !vertices_agregados->esta_el_dato(actual->get_dato_vertice()) ){
+      vertices_a_agregar->alta(actual->get_dato_vertice());//alta
+    }
+    actual = actual->get_vertice_siguiente(); //Actual pasa a ser el siguiente
+  }
+}
+
+template < typename Dato >
+int Grafo<Dato>::crear_arbol(Grafo<Dato> * arbol ,Lista<Dato> * vertices_agregados, Lista<Camino<Dato> *> * caminos){
+  for (int i = 1; i <= cantidad_vertices; i++){
+    arbol->agregar_vertice(vertices_agregados->consulta(i));
   }
   //como hay N vertices, y N-1 aristas la condicion de corte tiene que ser 1
   //antes que cantidad_vertices
   Camino<Dato> * camino_minimo;
+  int costo_arbol_expansion_minima = 0;
   for (int i = 1 ; i < cantidad_vertices; i++){
-    camino_minimo = caminos.consulta(i);
+    camino_minimo = caminos->consulta(i);
     Dato origen = camino_minimo->get_origen();
     Dato adyacente = camino_minimo->get_adyacente();
     int costo_arista_agregar = camino_minimo->get_costo();
-    arbol.agregar_arista(origen,adyacente,costo_arista_agregar);
+    costo_arbol_expansion_minima += costo_arista_agregar;
+    arbol->agregar_arista(origen,adyacente,costo_arista_agregar);
   }
-  arbol.imprimir_grafo();
-
-   vertices_agregados.vaciar_datos(); //se vacia para que no borre los del grafo y del arbol
-   arbol.cambiar_datos_por_nulo(); //se vacia para que no borre los del grafo
-
+  return costo_arbol_expansion_minima;
 }
 
 template <typename Dato>
