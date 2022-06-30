@@ -38,9 +38,14 @@ void Menu::opciones_interfaz(int opcion){
       presione_para_salir();
       break;
     case 4:
-      system("clear");
-      cout << "Saludos" << endl;
+      cout << "Saco primer vertice" << endl;
+      grafo_completo.eliminar_vertice(grafo_completo.get_primer_vertice()->get_dato_vertice());
       break;
+    case 5:
+      system("clear");
+      cout << "\t\t\t\t\t\t\t\tSaludos" << endl;
+      break;
+
 
     default:
       cout << "Opcion en invalida. Intentelo de nuevo" << endl << endl;
@@ -55,7 +60,8 @@ void Menu::mostrar_menu(){
     cout << "\t1 - Imprimir grafo" << endl;
     cout << "\t2 - Imprimir tabla hash" << endl;
     cout << "\t3 - Arbol expansion minima" << endl;
-    cout << "\t4 - Salir" << endl;
+    cout << "\t4 - Eliminar primer vertice" << endl;
+    cout << "\t5 - Salir" << endl;
 }
 
 
@@ -68,7 +74,7 @@ int Menu::ingresar_opciones_interfaz(){
 
 void Menu::interfaz_usuario_con_ingreso(){
   int selector;
-  while (selector != 4){
+  while (selector != 5){
     mostrar_menu();
     selector = ingresar_opciones_interfaz();
     opciones_interfaz(selector);

@@ -30,6 +30,7 @@ class Vector{
     Pos: -
     */
     void eliminar_objeto ( string objeto_sacar );
+
     // Definida en "Lista.h"
     Escritor* consulta ( string referencia );
     /*
