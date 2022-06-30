@@ -92,7 +92,7 @@ void Menu::imprimir_escritores(){
         vector_escritores[i].imprimir_lista();
       }
     }
-  }
+}
 
 void Menu::presione_para_salir(){
   cout << "\n ----- Preiona enter para continuar -----" << endl;
