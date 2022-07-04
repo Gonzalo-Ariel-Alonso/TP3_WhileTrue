@@ -13,7 +13,12 @@
 #include "Vector.h"
 
 
-#define TAMANIO_VECTOR 25
+
+
+/*
+TAMAÑO_VECTOR = cantidad elementos / tamaño vector
+  TAMAÑO_VECTOR >= 0.8 y como da 25
+*/
 
 using namespace std;
 

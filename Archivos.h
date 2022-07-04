@@ -19,13 +19,10 @@
 #include "Genero.h"
 
 
+const int TAMANIO_VECTOR = 25;
+
 using namespace std;
 
-#define TAMANIO_VECTOR 25
-/*
-TAMAÑO_VECTOR = cantidad elementos / tamaño vector
-  TAMAÑO_VECTOR >= 0.8 y como da 25
-*/
 
 
 class Archivos {
@@ -38,9 +35,9 @@ class Archivos {
 
   public:
     /*
-    Constructor con grafo 
-    Pre: archivo escritores, vector escritores,puntero grafo , archivo lecturas txt 
-    Pos: inicializa un archivo 
+    Constructor con grafo
+    Pre: archivo escritores, vector escritores,puntero grafo , archivo lecturas txt
+    Pos: inicializa un archivo
     */
     Archivos( string escritores_txt ,Vector * vector_escritores, Grafo<Lectura*> * grafo, string lecturas_txt);
     /*
@@ -62,9 +59,9 @@ class Archivos {
     */
     void leer_archivo_escritores();
     /*
-    Inicializa el escritor y lo guarda en el vector  
+    Inicializa el escritor y lo guarda en el vector
     Pre: Los parametros levantados del archivo escritores.txt
-    Pos: Transforma la referencia del escritor a un hash y lo almacena dentro del vector en su respectiva posiscion 
+    Pos: Transforma la referencia del escritor a un hash y lo almacena dentro del vector en su respectiva posiscion
     */
     void carga_vector_escritores(string referencia_escritor, string nombre, string nacionalidad, string anio_nacimiento, string anio_fallecimiento);
     /*
@@ -81,7 +78,7 @@ class Archivos {
     void cargar_grafo();
     /*
     Transforma el genero del string a un numero
-    Pre: Recibe un string 
+    Pre: Recibe un string
     Pos: Devuelve el numero al que le corresponda el genero en el orden que esta dentro de "Tipo_de_lecturas.h"
     */
     Generos de_string_a_enumerado(string genero_string);
