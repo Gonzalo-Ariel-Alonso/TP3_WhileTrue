@@ -11,7 +11,7 @@
 #include "Lectura.h"
 #include "Grafo.h"
 #include "Vector.h"
-
+#include "Funciones.h"
 
 
 
@@ -27,7 +27,7 @@ private:
   //atributos
   Vector * vector_escritores;
   Grafo<Lectura *> grafo_completo;
-
+  Funciones * funciones;
 
 
 public:

@@ -9,11 +9,12 @@ Menu::Menu(string archivo_escritores, string archivo_lecturas){
   manejo_archivos.cargar_grafo();
 
   grafo_completo.transformar_a_grafo_completo();
-
+  funciones = new Funciones(&grafo_completo,vector_escritores);
 }
 
 Menu::~Menu(){
   delete [] vector_escritores;
+  delete funciones;
 }
 
 void Menu::opciones_interfaz(int opcion){
