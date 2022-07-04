@@ -19,8 +19,6 @@
 #include "Genero.h"
 
 
-const int TAMANIO_VECTOR = 25;
-
 using namespace std;
 
 
@@ -64,12 +62,7 @@ class Archivos {
     Pos: Transforma la referencia del escritor a un hash y lo almacena dentro del vector en su respectiva posiscion
     */
     void carga_vector_escritores(string referencia_escritor, string nombre, string nacionalidad, string anio_nacimiento, string anio_fallecimiento);
-    /*
-    Transforma la referencia del escritor a un hash
-    Pre: La referencia del escritor(una cadena de numeros)
-    Pos: Devuelve la posicion en la que iria el escritor dentro del vector
-    */
-    int funcion_hashing ( string referencia_escritor );
+
     /*
     Carga el grafo con las lecturas dentro de lecturas.txt
     Pre: -

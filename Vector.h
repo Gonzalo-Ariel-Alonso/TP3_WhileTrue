@@ -5,6 +5,8 @@
 #include "Escritor.h"
 #include "Lista.h"
 
+const int TAMANIO_VECTOR = 25;
+
 class Vector{
   private:
     //atributos
@@ -45,6 +47,13 @@ class Vector{
     Pos: -
     */
     void imprimir_lista();
+
+    /*
+    Transforma la referencia del escritor a un hash
+    Pre: La referencia del escritor(una cadena de numeros)
+    Pos: Devuelve la posicion en la que iria el escritor dentro del vector
+    */
+    int funcion_hashing ( string referencia_escritor );
   };
 
 

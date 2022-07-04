@@ -32,3 +32,10 @@ int Vector::get_cantidad_anidados(){
 
   return cantidad_anidados;
 }
+
+
+int Vector::funcion_hashing(string referencia_escritor){
+  int referencia = stoi(referencia_escritor);
+  int posicion_hashing = referencia % TAMANIO_VECTOR;
+  return posicion_hashing;
+}
