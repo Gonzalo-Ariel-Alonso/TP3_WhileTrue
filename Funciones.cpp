@@ -111,25 +111,41 @@ void Funciones::catalogo_escritores(){
 
 void Funciones::eliminar_escritor(){
     catalogo_escritores();
-    string codigo_ismi,opcion,nombre_escritor;
-    int posicion;
+    string codigo_isni,opcion;
     cout << "Desea dar de baja al escritor, por el nombre digite 1, o por codigo ISNI digite 2:" << endl;
     cin >> opcion;
-    if(opcion == "2"){
-      system("clear");
+    while(opcion != "salir"){
+      if(opcion == "2"){
+        borrar_escritor_ISNI(codigo_isni);
+         cout << "Se a borrado con exito";
+        opcion = "salir";
+      }
+      else if(opcion == "1"){
+        borrar_escritor_nombre();
+        cout << "Se a borrado con exito";
+        opcion = "salir";
+      }
+      else{
+        cout << "Error,para dar de baja al escritor, por el nombre digite 1, o por codigo ISNI digite 2\n si desea salir digite salir" << endl;
+        cin >> opcion;
+        }
+  }
+}
+
+void Funciones::borrar_escritor_ISNI(string codigo_isni){
+      int posicion;
       cout << "escriba el codigo ISNI del escritor que desea borrar:"  << endl;
-      cin >> codigo_ismi;
-      posicion = vector_escritores->funcion_hashing(codigo_ismi);
-      vector_escritores[posicion].eliminar_objeto(codigo_ismi);
-    }
-    else{
-      system("clear");
+      cin >> codigo_isni;
+      posicion = vector_escritores->funcion_hashing(codigo_isni);
+      vector_escritores[posicion].eliminar_objeto(codigo_isni);
+}
+void Funciones::borrar_escritor_nombre(){
+      string nombre_escritor;
       cout << "Escriba su nombre:";
       cin.ignore();
       getline(cin, nombre_escritor);
       for(int i = 0; i < TAMANIO_VECTOR; i++){
         vector_escritores[i].eliminar_objeto_nombre(nombre_escritor);
-      }
-
-    }
+  }
 }
+
