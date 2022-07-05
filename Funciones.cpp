@@ -67,7 +67,7 @@ void Funciones::agregar_escritor(){
     while (continuar == "0"){
       while(!entrada_valida){
         cout << "Ingrese el coidigo ISNI (maximo 4 digitos)\n";
-        cin.sync();
+        cin.ignore();
         getline(cin,codigo_ISNI);
         try{
             stoi(codigo_ISNI);
@@ -78,26 +78,21 @@ void Funciones::agregar_escritor(){
             cout << "Error, debe digitar un codigo ISNI solo con numeros, intentelo de nuevo \n";
             entrada_valida = false;
         }
-        catch(codigo_ISNI.length() > 4){
-            system("clear");
-            cout << "Error, el ISNI no puede tener mas de 4 digitos\n";
-            entrada_valida = false;
-        }
       }
         cout << "Ingrese el nombre del escritor que desea agregar\n";
-        cin.sync();
+        cin.ignore();
         getline(cin,nombre_y_apellido);
         cout << "Ingrese el pais donde nacio\n";
-        cin.sync();
+        cin.ignore();
         getline(cin,nacionalidad);
         cout << "Ingrese el anio en que nacio, si es desconocido presione enter\n";
-        cin.sync();
+        cin.ignore();;
         getline(cin,ano_nacimiento);
         cout << "Ingrese el anio en que fallecio, si es desconocido presione enter\n";
-        cin.sync();
+        cin.ignore();
         getline(cin,ano_fallecimiento);
         cout << "Digite 0 para volver a escribir los datos o cualquier otro numero para continuar y agregar el escritor\n";
-        cin.sync();
+        cin.ignore();
         getline(cin,continuar);
     }
     int _codigo_ISNI = stoi(codigo_ISNI);
