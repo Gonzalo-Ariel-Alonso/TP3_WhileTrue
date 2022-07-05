@@ -51,3 +51,15 @@ void Vector::eliminar_objeto_nombre (string nombre_escritor){
     }
   }
 }
+
+bool Vector::consulta ( string referencia ){
+  int tamanio = lista_objetos.obtener_cantidad();
+  int encontro = false;
+  for(int i = 1; i <= tamanio; i++){
+    if (lista_objetos.consulta(i)->devolver_nombre() == referencia ){
+      lista_objetos.consulta(i)->mostrar_datos();
+      encontro = true;
+    }
+  }
+  return encontro;
+}

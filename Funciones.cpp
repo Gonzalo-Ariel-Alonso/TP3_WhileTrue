@@ -146,6 +146,24 @@ void Funciones::borrar_escritor_nombre(){
       getline(cin, nombre_escritor);
       for(int i = 0; i < TAMANIO_VECTOR; i++){
         vector_escritores[i].eliminar_objeto_nombre(nombre_escritor);
-  }
+      }
 }
 
+
+void Funciones::consulta_escritor(){
+  bool borrado = false;
+  string ingreso_del_usuario;
+  cout << "Digitar el nombre" << endl;
+  cin.ignore();
+  getline(cin, ingreso_del_usuario);
+  system("clear");
+  for (int i = 0; i < TAMANIO_VECTOR; i++){
+    borrado = vector_escritores[i].consulta(ingreso_del_usuario);
+    if (borrado == true){
+      i = TAMANIO_VECTOR + 1;
+    }
+  }
+  if (borrado == false){
+    cout << "No se encontro el escritor" << endl;
+  }
+}

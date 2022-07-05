@@ -37,6 +37,8 @@ public:
     // PRE:
     // POST: Nos da a elegir un escritor para eliminarlo
     void eliminar_escritor();
+
+    void consulta_escritor();
 private:
     void borrar_escritor_ISNI(string codigo_ISNI);
     void borrar_escritor_nombre();

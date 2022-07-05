@@ -50,6 +50,8 @@ void Menu::opciones_interfaz(int opcion){
       presione_para_salir();
       break;
     case 7:
+      funciones->consulta_escritor();
+      presione_para_salir();
       break;
     case 8:
       system("clear");
@@ -74,6 +76,7 @@ void Menu::mostrar_menu(){
     cout << "\t4 - Eliminar primer vertice" << endl;
     cout << "\t5 - Agregar escritor" << endl;
     cout << "\t6 - Eliminar escritor" << endl;
+    cout << "\t7 - Consultar escritor" << endl;
     cout << "\t8 - Salir" << endl;
 }
 

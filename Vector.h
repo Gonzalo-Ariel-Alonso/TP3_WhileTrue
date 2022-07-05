@@ -2,8 +2,10 @@
 #define VECTOR_H
 
 // includes de otros TDA
+#include <string>
 #include "Escritor.h"
 #include "Lista.h"
+
 
 const int TAMANIO_VECTOR = 25;
 
@@ -36,7 +38,9 @@ class Vector{
     void eliminar_objeto_nombre (string nombre_escritor);
 
     // Definida en "Lista.h"
-    Escritor* consulta ( string referencia );
+    bool consulta ( string referencia );
+
+
     /*
     Devuelve la cantidad de anidados(atributo)
     Pre: -
