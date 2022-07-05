@@ -60,27 +60,45 @@ void Funciones::eliminar_primer_vertice(){
 
 void Funciones::agregar_escritor(){
     string nombre_y_apellido,nacionalidad,ano_nacimiento,ano_fallecimiento, codigo_ISNI;
-    string continuar = "1";
+    string continuar = "0";
+    bool entrada_valida = false;
     int pos_vector;
-    while (continuar != "0"){
-      cout << "Ingrese el coidigo ISNI (4 digitos)\n";
-      cin.sync();
-      getline(cin,codigo_ISNI);
-      cout << "Ingrese el nombre del escritor que desea agregar\n";
-      cin.sync();
-      getline(cin,nombre_y_apellido);
-      cout << "Ingrese el pais donde nacio\n";
-      cin.sync();
-      getline(cin,nacionalidad);
-      cout << "Ingrese el anio en que nacio, si es desconocido escriba -1\n";
-      cin.sync();
-      getline(cin,ano_nacimiento);
-      cout << "Ingrese el anio en que fallecio\n";
-      cin.sync();
-      getline(cin,ano_fallecimiento);
-      cout << "Digite 0 para volver a escribir los datos o cualquier otro numero para continuar y agregar el escritor\n";
-      cin.sync();
-      getline(cin,continuar);
+    system("clear");
+    while (continuar == "0"){
+      while(!entrada_valida){
+        cout << "Ingrese el coidigo ISNI (maximo 4 digitos)\n";
+        cin.sync();
+        getline(cin,codigo_ISNI);
+        try{
+            stoi(codigo_ISNI);
+            entrada_valida = true;
+        }
+        catch(exception &err){
+            system("clear");
+            cout << "Error, debe digitar un codigo ISNI solo con numeros, intentelo de nuevo \n";
+            entrada_valida = false;
+        }
+        catch(codigo_ISNI.length() > 4){
+            system("clear");
+            cout << "Error, el ISNI no puede tener mas de 4 digitos\n";
+            entrada_valida = false;
+        }
+      }
+        cout << "Ingrese el nombre del escritor que desea agregar\n";
+        cin.sync();
+        getline(cin,nombre_y_apellido);
+        cout << "Ingrese el pais donde nacio\n";
+        cin.sync();
+        getline(cin,nacionalidad);
+        cout << "Ingrese el anio en que nacio, si es desconocido presione enter\n";
+        cin.sync();
+        getline(cin,ano_nacimiento);
+        cout << "Ingrese el anio en que fallecio, si es desconocido presione enter\n";
+        cin.sync();
+        getline(cin,ano_fallecimiento);
+        cout << "Digite 0 para volver a escribir los datos o cualquier otro numero para continuar y agregar el escritor\n";
+        cin.sync();
+        getline(cin,continuar);
     }
     int _codigo_ISNI = stoi(codigo_ISNI);
     Escritor *nuevo_escritor = new Escritor(_codigo_ISNI,nombre_y_apellido,nacionalidad,ano_nacimiento,ano_fallecimiento);
