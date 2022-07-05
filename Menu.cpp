@@ -21,45 +21,38 @@ void Menu::opciones_interfaz(int opcion){
 
   switch (opcion){
     case 1:
-      system("clear");
-      cout << "\nGRAFO COMPLETO\n";
-      if(!grafo_completo.vacia()){
-      grafo_completo.imprimir_grafo();
+      funciones->imprimir_grafo();
       presione_para_salir();
-      cout << "\n";
-      }
-      else
-        cout << "\t\t\t\t\t\t -------Grafo Vacio-------" << endl;
       break;
     case 2:
       system("clear");
-      imprimir_escritores();
+      funciones->imprimir_tabla_hash();
       presione_para_salir();
       break;
     case 3:
       system("clear");
-      cout << "\nARBOL EXPANSION MINIMA\n";
-      if(!grafo_completo.vacia()){
-      grafo_completo.arbol_expansion_minima(grafo_completo.get_primer_vertice()->get_dato_vertice());
+      funciones->imprimir_arbol_expansion_minima();
       presione_para_salir();
-      }
-      else
-        cout << "\t\t\t\t\t\t -------Grafo Vacio-------" << endl;
       break;
     case 4:
       system("clear");
-      if(!grafo_completo.vacia()){
-      cout << "Saco primer vertice" << "( " + grafo_completo.get_primer_vertice()->get_dato_vertice()->get_titulo() + " )" << endl;
-      grafo_completo.eliminar_vertice(grafo_completo.get_primer_vertice()->get_dato_vertice());
+      funciones->eliminar_primer_vertice();
       presione_para_salir();
-      }
-      else
-        cout << "\t\t\t\t\t\t -------Grafo Vacio, no se pueden sacar mas vertices-------" << endl;
       break;
     case 5:
+      funciones->agregar_escritor();
+      presione_para_salir();
+      break;
+    case 6:
+      funciones->catalogo_escritores();
+      break;
+    case 7:
+      break;
+    case 8:
       system("clear");
       cout << "\t\t\t\t\t\t\t\tSaludos" << endl;
       break;
+
 
 
     default:
@@ -76,7 +69,8 @@ void Menu::mostrar_menu(){
     cout << "\t2 - Imprimir tabla hash" << endl;
     cout << "\t3 - Arbol expansion minima" << endl;
     cout << "\t4 - Eliminar primer vertice" << endl;
-    cout << "\t5 - Salir" << endl;
+    cout << "\t5 - Agregar escritor" << endl;
+    cout << "\t8 - Salir" << endl;
 }
 
 
@@ -89,26 +83,15 @@ int Menu::ingresar_opciones_interfaz(){
 
 void Menu::interfaz_usuario_con_ingreso(){
   int selector;
-  while (selector != 5){
+  while (selector != 8){
     mostrar_menu();
     selector = ingresar_opciones_interfaz();
     opciones_interfaz(selector);
   }
 }
 
-void Menu::imprimir_escritores(){
-    cout << "TABLA HASH" << endl;
-    for(int i = 0; i < TAMANIO_VECTOR; i++){
-      if (vector_escritores[i].get_cantidad_anidados() != 0){
-        cout << endl << " --------------------" << endl;
-        cout << "POSICION " << i << " DEL VECTOR:" << endl;
-        vector_escritores[i].imprimir_lista();
-      }
-    }
-}
-
 void Menu::presione_para_salir(){
-  cout << "\n ----- Preiona enter para continuar -----" << endl;
+  cout << "\n ----- Presiona enter para continuar -----" << endl;
   cin.ignore();
   cin.get();
   system("clear");

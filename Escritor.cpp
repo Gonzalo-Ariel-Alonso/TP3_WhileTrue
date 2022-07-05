@@ -30,6 +30,7 @@ void Escritor::modificar_anio_fallecimiento(string anio_fallecimiento_nuevo){
 }
 
 void Escritor::mostrar_datos(){
+    cout << "Codigo ISNI: " << referencia << endl;
     cout << "Nombre: " << nombre_y_apellido << endl;
     cout << "Nacionalidad: " << nacionalidad << endl;
     cout << "Ano de nacimiento: " << anio_nacimiento << endl;

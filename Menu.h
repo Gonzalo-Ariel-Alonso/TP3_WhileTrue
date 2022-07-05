@@ -60,9 +60,6 @@ private:
   int ingresar_opciones_interfaz();
 
   //PRE: ---
-  ///POST: ---
-  void imprimir_escritores();
-  //PRE: ---
   //POST: ---
   void presione_para_salir();
 };

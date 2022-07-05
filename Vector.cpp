@@ -23,7 +23,6 @@ void Vector::eliminar_objeto ( string objeto_sacar ){
 void Vector::imprimir_lista(){
   for (int i = 1; i <= cantidad_anidados; i++){
     cout << endl;
-    cout << "anidado  " << i << "):" << endl;
     lista_objetos.consulta(i)->mostrar_datos();
   }
 }
