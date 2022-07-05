@@ -92,7 +92,31 @@ void Funciones::agregar_escritor(){
 
 void Funciones::catalogo_escritores(){
   for(int i = 0; i < TAMANIO_VECTOR; i++){
-
     vector_escritores[i].imprimir_lista();
   }
+}
+
+void Funciones::eliminar_escritor(){
+    catalogo_escritores();
+    string codigo_ismi,opcion,nombre_escritor;
+    int posicion;
+    cout << "Desea dar de baja al escritor, por el nombre digite 1, o por codigo ISNI digite 2:" << endl;
+    cin >> opcion;
+    if(opcion == "2"){
+      system("clear");
+      cout << "escriba el codigo ISNI del escritor que desea borrar:"  << endl;
+      cin >> codigo_ismi;
+      posicion = vector_escritores->funcion_hashing(codigo_ismi);
+      vector_escritores[posicion].eliminar_objeto(codigo_ismi);
+    }
+    else{
+      system("clear");
+      cout << "Escriba su nombre:";
+      cin.ignore();
+      getline(cin, nombre_escritor);
+      for(int i = 0; i < TAMANIO_VECTOR; i++){
+        vector_escritores[i].eliminar_objeto_nombre(nombre_escritor);
+      }
+
+    }
 }

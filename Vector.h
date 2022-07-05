@@ -33,6 +33,8 @@ class Vector{
     */
     void eliminar_objeto ( string objeto_sacar );
 
+    void eliminar_objeto_nombre (string nombre_escritor);
+
     // Definida en "Lista.h"
     Escritor* consulta ( string referencia );
     /*

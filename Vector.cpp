@@ -16,8 +16,10 @@ void Vector::eliminar_objeto ( string objeto_sacar ){
     if ( lista_objetos.consulta(i)->obtener_referencia() == _objeto_sacar){
       lista_objetos.baja(i);
       cantidad_anidados --;
+      i = tamanio+1;
     }
   }
+
 }
 
 void Vector::imprimir_lista(){
@@ -37,4 +39,15 @@ int Vector::funcion_hashing(string referencia_escritor){
   int referencia = stoi(referencia_escritor);
   int posicion_hashing = referencia % TAMANIO_VECTOR;
   return posicion_hashing;
+}
+
+void Vector::eliminar_objeto_nombre (string nombre_escritor){
+  int tamanio = lista_objetos.obtener_cantidad();
+  for(int i = 1; i <= tamanio; i++){
+    if ( lista_objetos.consulta(i)->devolver_nombre() == nombre_escritor){
+      lista_objetos.baja(i);
+      cantidad_anidados --;
+      i = tamanio + 1;
+    }
+  }
 }

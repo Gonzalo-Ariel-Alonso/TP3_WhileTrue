@@ -22,6 +22,7 @@ public:
     void eliminar_primer_vertice();
     void agregar_escritor();
     void catalogo_escritores();
+    void eliminar_escritor();
 };
 
 

@@ -40,11 +40,14 @@ void Menu::opciones_interfaz(int opcion){
       presione_para_salir();
       break;
     case 5:
+      system("clear");
       funciones->agregar_escritor();
       presione_para_salir();
       break;
     case 6:
-      funciones->catalogo_escritores();
+      system("clear");
+      funciones->eliminar_escritor();
+      presione_para_salir();
       break;
     case 7:
       break;
@@ -70,6 +73,7 @@ void Menu::mostrar_menu(){
     cout << "\t3 - Arbol expansion minima" << endl;
     cout << "\t4 - Eliminar primer vertice" << endl;
     cout << "\t5 - Agregar escritor" << endl;
+    cout << "\t6 - Eliminar escritor" << endl;
     cout << "\t8 - Salir" << endl;
 }
 
