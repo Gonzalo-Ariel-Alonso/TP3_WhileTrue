@@ -1,56 +1,57 @@
 C
-Casa Tomada
+a0 Casa Tomada
 20
 1951
 Bestiario
-(1)
+(1568)
 
 N
-Rayuela
+a1 Rayuela
 2900
 1963
 FICCION
-(1)
+(1568)
 
 N
-Misery
-2100
-1987
-TERROR
-(3)
+a2 Una columna de fuego
+4800
+2017
+HISTORICA
+Guerra de religiones en Europa en la segunda mitad del siglo XVI
+(5474)
 
 P
-El Poema del Mio Cid
+a3 El poema del mio Cid
 480
 1140
 3733
 ANONIMO
 
+C
+a4 La noche de los dones
+2000
+1975
+El libro de arena
+(6)
+
+N
+a5 Misery
+2100
+1987
+TERROR
+(1757)
+
+N
+a6 Los mitos de la historia argentina
+400
+2004
+HISTORICA
+historia argentina entre 1900 y 2000
+(15)
+
 P
-Voy a dormir
+a7 Voy a dormir
 1
 1938
 14
-(4)
-
-N
-Frankestein
-1600
-1818
-TERROR
-(2)
-
-N
-Una columna de fuego
-4800
-2017
-HISTORICA
-Guerra de religiones en Europa en la segunda mitad del siglo XVI
-(5)
-
-C
-El elefante y la cadena
-15
-2025
-Liberales
-(1)
+(4567)

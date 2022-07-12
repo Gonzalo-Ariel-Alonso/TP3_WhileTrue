@@ -7,7 +7,7 @@
 #include <string>
 
 // includes de otros TDA
-#include "Vector.h"
+#include "Tabla_hash.h"
 #include "Grafo.h"
 #include "Tipo_de_lecturas.h"
 #include "Escritor.h"
@@ -26,7 +26,7 @@ using namespace std;
 class Archivos {
   private:
     //atributos
-    Vector * vector_escritores;
+    Tabla_hash * vector_hashing;
     string escritores_txt;
     Grafo<Lectura*> * grafo_completo;
     string lecturas_txt;
@@ -37,7 +37,7 @@ class Archivos {
     Pre: archivo escritores, vector escritores,puntero grafo , archivo lecturas txt
     Pos: inicializa un archivo
     */
-    Archivos( string escritores_txt ,Vector * vector_escritores, Grafo<Lectura*> * grafo, string lecturas_txt);
+    Archivos( string escritores_txt ,Tabla_hash * vector_hashing, Grafo<Lectura*> * grafo, string lecturas_txt);
     /*
 
     */
@@ -53,7 +53,7 @@ class Archivos {
     /*
     Lee el archivo escritores txt y carga el vector con los datos que haya adentro
     Pre: -
-    Pos: Carga el vector_escritores con los datos dentro del archivo escritores.txt
+    Pos: Carga el vector_hashing con los datos dentro del archivo escritores.txt
     */
     void leer_archivo_escritores();
     /*
@@ -61,7 +61,7 @@ class Archivos {
     Pre: Los parametros levantados del archivo escritores.txt
     Pos: Transforma la referencia del escritor a un hash y lo almacena dentro del vector en su respectiva posiscion
     */
-    void carga_vector_escritores(string referencia_escritor, string nombre, string nacionalidad, string anio_nacimiento, string anio_fallecimiento);
+    void carga_vector_hashing(string referencia_escritor, string nombre, string nacionalidad, string anio_nacimiento, string anio_fallecimiento);
 
     /*
     Carga el grafo con las lecturas dentro de lecturas.txt

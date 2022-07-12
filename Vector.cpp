@@ -35,11 +35,7 @@ int Vector::get_cantidad_anidados(){
 }
 
 
-int Vector::funcion_hashing(string referencia_escritor){
-  int referencia = stoi(referencia_escritor);
-  int posicion_hashing = referencia % TAMANIO_VECTOR;
-  return posicion_hashing;
-}
+
 
 void Vector::eliminar_objeto_nombre (string nombre_escritor){
   int tamanio = lista_objetos.obtener_cantidad();

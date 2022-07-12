@@ -25,7 +25,9 @@ using namespace std;
 class Menu {
 private:
   //atributos
-  Vector * vector_escritores;
+
+  //Tabla_hash hashing;
+  Tabla_hash vector_hashing; //
   Grafo<Lectura *> grafo_completo;
   Funciones * funciones;
 

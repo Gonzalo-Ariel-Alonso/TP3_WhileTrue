@@ -1,16 +1,16 @@
 #include "Archivos.h"
 
 
-Archivos::Archivos( string escritores_txt ,Vector * vector_escritores, Grafo<Lectura*> * grafo, string lecturas_txt ){
+Archivos::Archivos( string escritores_txt ,Tabla_hash * vector_hashing, Grafo<Lectura*> * grafo, string lecturas_txt ){
   this->escritores_txt = escritores_txt;
-  this->vector_escritores = vector_escritores;
+  this->vector_hashing = vector_hashing;
   this->grafo_completo = grafo;
   this->lecturas_txt = lecturas_txt;
 
 }
 
 Archivos::~Archivos(){
-  vector_escritores = 0;
+  vector_hashing = 0;
   grafo_completo = 0;
 }
 
@@ -46,7 +46,7 @@ void Archivos::leer_archivo_escritores(){
         if (anio_fallecimiento != ""){
             getline(escritores,vacio);
         }
-        carga_vector_escritores(referencia_escritor, nombre, nacionalidad, anio_nacimiento, anio_fallecimiento);
+        carga_vector_hashing(referencia_escritor, nombre, nacionalidad, anio_nacimiento, anio_fallecimiento);
         pos++;
         anio_fallecimiento = ""; anio_nacimiento = "";
     }
@@ -54,13 +54,16 @@ void Archivos::leer_archivo_escritores(){
 }
 
 
-void Archivos::carga_vector_escritores(string referencia_escritor,string nombre, string nacionalidad, string anio_nacimiento, string anio_fallecimiento){
+void Archivos::carga_vector_hashing(string referencia_escritor,string nombre, string nacionalidad, string anio_nacimiento, string anio_fallecimiento){
   //crear objeto escritor
   referencia_escritor = sacar_parentesis(referencia_escritor);
-  int pos = vector_escritores[1].funcion_hashing(referencia_escritor);//la posicion dentro del vector de hash
+  /*
+  int pos = vector_hashing[1].funcion_hashing(referencia_escritor);//la posicion dentro del vector de hash
+  */
   int referencia_escritor_entero = stoi(referencia_escritor);
-  Escritor* aux = new Escritor(referencia_escritor_entero,nombre,nacionalidad,anio_nacimiento,anio_fallecimiento);
-  vector_escritores[pos].agregar_objeto(aux);
+
+  Escritor * aux = new Escritor(referencia_escritor_entero,nombre,nacionalidad,anio_nacimiento,anio_fallecimiento);
+  vector_hashing->alta(aux);
   //AGREGARLO AL VECTOR
 }
 
@@ -137,6 +140,7 @@ void Archivos::crear_tipo_lectura(char tipo_lectura, string titulo, string durac
 
 
 void Archivos::crear_tipo_lectura(char tipo_lectura, string titulo, string duracion_lectura, string ano_publicacion, int referencia_autor, string referencia_a_lectura, string tema){
+  tipo_lectura = 'H';
   Generos genero = de_string_a_enumerado(referencia_a_lectura);
   Novela_historica* nueva_novela_historica = new Novela_historica(tipo_lectura,titulo,stoi(duracion_lectura),stoi(ano_publicacion),referencia_autor,genero,tema);
   grafo_completo->agregar_vertice(nueva_novela_historica);

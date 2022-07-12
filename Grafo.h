@@ -396,7 +396,7 @@ void Grafo<Dato>::eliminar_vertice(Dato dato){
   }
 
 }
-
+/*
 template < typename Dato >
 void Grafo<Dato>::imprimir_grafo(){
   if (cantidad_vertices > 0){
@@ -425,13 +425,52 @@ void Grafo<Dato>::imprimir_grafo(){
     }
   }
 }
+*/
+
+template < typename Dato >
+void Grafo<Dato>::imprimir_grafo(){
+  if (cantidad_vertices > 0){
+    Vertice<Dato> * vertice_origen = primer_vertice; // vertice origen
+    Arista<Dato> * arista_entre_vertices = vertice_origen->get_arista_adyacente();
+    Dato  dato_vertice_origen ;
+    Dato  dato_vertice_adyacente ;
+
+
+    cout << "\nLECTURA (duracion) ------- TIEMPO DE DESCANSO(min) ------>LECTURAS SIGUIENTES (duracion)\n\n";
+    //cout << "\nVERTICE ---TIEMPO_DE_DESCANSO--->VERTICES ADYACENTES\n\n";
+    for (int i = 1; i <= cantidad_vertices; i++){
+      dato_vertice_origen = vertice_origen->get_dato_vertice();
+
+      while (arista_entre_vertices != 0){
+        cout << dato_vertice_origen->get_titulo();
+        dato_vertice_adyacente = arista_entre_vertices->get_vertice_adyacente()->get_dato_vertice();
+        cout << " ( " << dato_vertice_origen->get_tiempo_lectura() << " ) ";
+        cout << "------- " << arista_entre_vertices->get_peso() << " ------>" << dato_vertice_adyacente->get_titulo();
+        cout << " ( " << dato_vertice_adyacente->get_tiempo_lectura() << " ) " << endl;
+        arista_entre_vertices = arista_entre_vertices->get_arista_siguiente();
+      }
+      if (vertice_origen->get_arista_adyacente() != 0 ){
+        cout << "\n";
+      }
+      if( vertice_origen->get_vertice_siguiente() != 0 ){
+        vertice_origen = vertice_origen->get_vertice_siguiente();
+        arista_entre_vertices = vertice_origen->get_arista_adyacente();
+      }
+
+    }
+  }
+
+}
+
 
 
 //ALGORIMO PRIM
 template<typename Dato>
 void Grafo<Dato>::arbol_expansion_minima(Dato vertice_inicio){
+
   Grafo<Dato> arbol; //arbol expansion minima estatico
   Lista<Dato> vertices_agregados; //guarda los vertices YA agregados
+
 
   Lista<Dato> vertices_a_agregar; // aca van todos los vertices NO agregados
 
@@ -508,7 +547,7 @@ void Grafo<Dato>::algoritmo_prim(Lista<Dato> * vertices_agregados, Lista<Dato> *
   // i < cantidad_vertices, porque el primero ya esta agregado entonces faltan N-1 vertices
 
   for (int i = 1; i < cantidad_vertices; i++){
-
+// N-1
     minima_salida = 0;
     minima_llegada = 0;
     //me guardo el costo de la arista, inicializa alto para saber que cualquier arista es mas chica

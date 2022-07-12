@@ -1,19 +1,17 @@
 #include "Menu.h"
 
 Menu::Menu(string archivo_escritores, string archivo_lecturas){
-  vector_escritores = new Vector[TAMANIO_VECTOR];
 
-  Archivos manejo_archivos(archivo_escritores, vector_escritores,&grafo_completo, archivo_lecturas);
+  Archivos manejo_archivos(archivo_escritores, &vector_hashing,&grafo_completo, archivo_lecturas);
   manejo_archivos.leer_archivo_escritores();
 
   manejo_archivos.cargar_grafo();
 
   grafo_completo.transformar_a_grafo_completo();
-  funciones = new Funciones(&grafo_completo,vector_escritores);
+  funciones = new Funciones(&grafo_completo,&vector_hashing);
 }
 
 Menu::~Menu(){
-  delete [] vector_escritores;
   delete funciones;
 }
 
@@ -26,7 +24,7 @@ void Menu::opciones_interfaz(int opcion){
       break;
     case 2:
       system("clear");
-      funciones->imprimir_tabla_hash();
+      vector_hashing.imprimir_tabla_hash();
       presione_para_salir();
       break;
     case 3:

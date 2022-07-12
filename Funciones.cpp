@@ -1,13 +1,13 @@
 #include "Funciones.h"
 
-Funciones::Funciones(Grafo<Lectura *>* grafo,Vector *vector_escritores){
+Funciones::Funciones(Grafo<Lectura *>* grafo,Tabla_hash * vector_hashing){
     this->grafo = grafo;
-    this->vector_escritores = vector_escritores;
+    this->vector_hashing = vector_hashing;
 }
 
 Funciones::~Funciones(){
     grafo = 0;
-    vector_escritores = 0;
+    vector_hashing = 0;
 }
 
 
@@ -24,16 +24,7 @@ void Funciones::imprimir_grafo(){
 }
 
 
-void Funciones::imprimir_tabla_hash(){
-    cout << "TABLA HASH" << endl;
-    for(int i = 0; i < TAMANIO_VECTOR; i++){
-      if (vector_escritores[i].get_cantidad_anidados() != 0){
-        cout << endl << " --------------------" << endl;
-        cout << "POSICION " << i << " DEL VECTOR:" << endl;
-        vector_escritores[i].imprimir_lista();
-      }
-    }
-}
+
 
 
 void Funciones::imprimir_arbol_expansion_minima(){
@@ -62,7 +53,6 @@ void Funciones::agregar_escritor(){
     string nombre_y_apellido,nacionalidad,ano_nacimiento,ano_fallecimiento, codigo_ISNI;
     string continuar = "0";
     bool entrada_valida = false;
-    int pos_vector;
     system("clear");
     while (continuar == "0"){
       while(!entrada_valida){
@@ -79,45 +69,38 @@ void Funciones::agregar_escritor(){
             entrada_valida = false;
         }
       }
+
         cout << "Ingrese el nombre del escritor que desea agregar\n";
-        cin.ignore();
         getline(cin,nombre_y_apellido);
         cout << "Ingrese el pais donde nacio\n";
-        cin.ignore();
+
         getline(cin,nacionalidad);
         cout << "Ingrese el anio en que nacio, si es desconocido presione enter\n";
-        cin.ignore();;
+
         getline(cin,ano_nacimiento);
         cout << "Ingrese el anio en que fallecio, si es desconocido presione enter\n";
-        cin.ignore();
         getline(cin,ano_fallecimiento);
         cout << "Digite 0 para volver a escribir los datos o cualquier otro numero para continuar y agregar el escritor\n";
-        cin.ignore();
         getline(cin,continuar);
     }
     int _codigo_ISNI = stoi(codigo_ISNI);
-    Escritor *nuevo_escritor = new Escritor(_codigo_ISNI,nombre_y_apellido,nacionalidad,ano_nacimiento,ano_fallecimiento);
-    pos_vector = vector_escritores->funcion_hashing(codigo_ISNI);
-    vector_escritores[pos_vector].agregar_objeto(nuevo_escritor);
+    Escritor * nuevo_escritor = new Escritor(_codigo_ISNI,nombre_y_apellido,nacionalidad,ano_nacimiento,ano_fallecimiento);
+    vector_hashing->alta(nuevo_escritor);
     system("clear");
     cout << "Escritor agregador !!" << endl;
 }
 
-void Funciones::catalogo_escritores(){
-  for(int i = 0; i < TAMANIO_VECTOR; i++){
-    vector_escritores[i].imprimir_lista();
-  }
-}
 
 void Funciones::eliminar_escritor(){
-    catalogo_escritores();
+    vector_hashing->catalogo_escritores();
     string codigo_isni,opcion;
     cout << "Desea dar de baja al escritor, por el nombre digite 1, o por codigo ISNI digite 2:" << endl;
+    cin.ignore();
     cin >> opcion;
     while(opcion != "salir"){
       if(opcion == "2"){
         borrar_escritor_ISNI(codigo_isni);
-         cout << "Se a borrado con exito";
+        cout << "Se a borrado con exito";
         opcion = "salir";
       }
       else if(opcion == "1"){
@@ -133,20 +116,16 @@ void Funciones::eliminar_escritor(){
 }
 
 void Funciones::borrar_escritor_ISNI(string codigo_isni){
-      int posicion;
       cout << "escriba el codigo ISNI del escritor que desea borrar:"  << endl;
       cin >> codigo_isni;
-      posicion = vector_escritores->funcion_hashing(codigo_isni);
-      vector_escritores[posicion].eliminar_objeto(codigo_isni);
+      vector_hashing->baja_escritor_por_codigo(codigo_isni);
 }
 void Funciones::borrar_escritor_nombre(){
       string nombre_escritor;
       cout << "Escriba su nombre:";
       cin.ignore();
       getline(cin, nombre_escritor);
-      for(int i = 0; i < TAMANIO_VECTOR; i++){
-        vector_escritores[i].eliminar_objeto_nombre(nombre_escritor);
-      }
+      vector_hashing->baja_escritor_por_nombre(nombre_escritor);
 }
 
 
@@ -157,12 +136,7 @@ void Funciones::consulta_escritor(){
   cin.ignore();
   getline(cin, ingreso_del_usuario);
   system("clear");
-  for (int i = 0; i < TAMANIO_VECTOR; i++){
-    borrado = vector_escritores[i].consulta(ingreso_del_usuario);
-    if (borrado == true){
-      i = TAMANIO_VECTOR + 1;
-    }
-  }
+  borrado = vector_hashing->buscar_escritor(ingreso_del_usuario);
   if (borrado == false){
     cout << "No se encontro el escritor" << endl;
   }
