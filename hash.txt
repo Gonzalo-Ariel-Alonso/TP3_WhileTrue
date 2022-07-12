@@ -1,0 +1,2 @@
+El mejor caso de busqueda en la tabla de hash se encuenta cuando no hay colision en la posicion de guardado, o fue el primer elemento que se guardo en la posicion.
+El peor de los casos surge cuando hay muchas colisiones en un espacio del vector y el elemento fue el ultimo en agregarse, por lo que tendra que iterar buscandolo hasta que llegue al final de la lista de colisionados.
